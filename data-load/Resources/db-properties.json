@@ -1,0 +1,7 @@
+{
+    "jdbcUrl": "jdbc:postgresql://heartsense.cgnk1yoo8fys.us-east-2.rds.amazonaws.com/heartsense",
+    "user": "root",
+    "mode":"append",
+    "password": "Death4bid!",
+    "driver":"org.postgresql.Driver"
+}
