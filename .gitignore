@@ -2,7 +2,8 @@
 __pycache__
 .DS_Store
 .ipynb_checkpoints
-risk/static/js/config.js
+heartsense/static/js/config.js
+heartsense/data-load/Resources/db-properties.json
 
 __pycache__/
 *.py[cod]
