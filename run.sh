@@ -1,0 +1,1 @@
+FLASK_APP=risk/app.py flask run
