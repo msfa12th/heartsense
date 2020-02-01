@@ -96,24 +96,31 @@ order by
 -- "United States"	"3168"
 -- "West"	"3168"
 
--- year, count()
+-- year, count() 880 per year 2000 through 2017
 -- 2000	"880"
--- 2001	"880"
--- 2002	"880"
--- 2003	"880"
--- 2004	"880"
--- 2005	"880"
--- 2006	"880"
--- 2007	"880"
--- 2008	"880"
--- 2009	"880"
--- 2010	"880"
--- 2011	"880"
--- 2012	"880"
--- 2013	"880"
--- 2014	"880"
--- 2015	"880"
--- 2016	"880"
--- 2017	"880"
 
-heart_cardio
+-- Table: public.heart_cardio_train
+
+-- DROP TABLE public.heart_cardio_train;
+
+-- https://www.kaggle.com/sulianova/cardiovascular-disease-dataset
+
+CREATE TABLE heart_cardio_train
+(
+    id integer,
+    age integer,
+    gender integer,
+    height integer,
+    weight double precision,
+    ap_hi integer,
+    ap_lo integer,
+    cholesterol integer,
+    gluc integer,
+    smoke integer,
+    alco integer,
+    active integer,
+    cardio integer
+);
+
+-- extra reference link
+-- https://medium.com/@dskswu/machine-learning-with-a-heart-predicting-heart-disease-b2e9f24fee84
