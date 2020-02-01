@@ -1,5 +1,5 @@
 -- Create Active User Table
-CREATE TABLE behavior_risk (
+CREATE TABLE heart_behavior_risk (
   Year int,
   LocationAbbr text,
   LocationDesc text,
@@ -72,8 +72,13 @@ CREATE TABLE heart_ml_cleveland (
     num int
 );
 
+-- initially created tables with stub columns
+-- then used pyspark to drop/recreate tables using pyspark inferSchema
+-- capturing initial schema columns above based on csv
+-- below showing alterations made after data placed in the tables
 
-
+-- cleveland data didn't have headers
+-- after pulling in the data renamed to match documentation
 ALTER TABLE heart_ml_cleveland 
 RENAME COLUMN _c0 TO age;
 
@@ -116,6 +121,10 @@ RENAME COLUMN _c12 TO thal;
 ALTER TABLE heart_ml_cleveland 
 RENAME COLUMN _c13 TO num;
 
+-- pyspark inserted '?' for null values when table initially created
+-- and then made data type for columns with '?' text even if all other values where numbers
+-- so I changed the value to NULL and changed datatype to numbers
+--
 update heart_ml_cleveland
 set thal=null
 where thal='?';
