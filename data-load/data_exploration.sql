@@ -41,8 +41,8 @@ where
 group by "Year","Category","Indicator"
 order by "Category","Year","Break_Out_Category"
 
---** MY CONCLUSION this dataset is insufficient
---** We need to go from data.world to the original source CDC
+--** MY CONCLUSION this dataset may be insufficient??
+--** We need to go from data.world to the original source CDC??
 -- https://catalog.data.gov/dataset/behavioral-risk-factor-data-heart-disease-amp-stroke-prevention
 -- https://catalog.data.gov/dataset/national-health-interview-survey-nhis-national-cardiovascular-disease-surveillance-data
 -- https://data.cdc.gov/Heart-Disease-Stroke-Prevention/National-Health-Interview-Survey-NHIS-National-Car/fwns-azgu
