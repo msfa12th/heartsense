@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import *
+
 # import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 import os
@@ -37,22 +38,30 @@ Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
 Behaviors = Base.classes.heart_behavior_risk
-# CardioTrain = Base.classes.heart_cardio_train
-# Heart_ml_cleveland = Base.classes.heart_ml_cleveland
-# Heart_mortality = Base.classes.heart_mortality
-# Heart_nhis = Base.classes.heart_nhis
-# Heart_patient = Base.classes.heart_patient
+CardioTrain = Base.classes.heart_cardio_train
+Heart_ml_cleveland = Base.classes.heart_ml_cleveland
+Heart_mortality = Base.classes.heart_mortality
+Heart_nhis = Base.classes.heart_nhis
+Heart_patient = Base.classes.heart_patient
 # Doctors = Base.classes.doctors
 # Patients = Base.classes.patients
-
-
-
 
 
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html", )
+
+@app.route("/bootstrap")
+def boostrap():
+    """Return the homepage."""
+    return render_template("index-bs3.html", )
+
+
+@app.route("/bkp")
+def bkp():
+    """Return the homepage."""
+    return render_template("index-bkp.html", )
 
 @app.route('/hello')
 def hello():
@@ -68,6 +77,12 @@ def test():
     # return jsonify(results)
     return render_template("index.html", rows=results)
 
+@app.route('/patientinfo')
+def get_patientinfo():
+    # patient_info = Heart_patient("Doctor Strange", "Scott Derrickson", "2016")  
+    # db_session.add(doctor_strange) 
+    return render_template("index.html")
+ 
 
 
 @app.route('/name/<name>')
