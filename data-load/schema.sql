@@ -330,6 +330,70 @@ alter table heart_behavior_risk RENAME COLUMN geolocation to "GeoLocation";
 
 -- consider making columns lower case
 
+
+--add calculated column for target based on num column
+alter table heart_ml_cleveland
+add column target integer;
+
+update heart_ml_cleveland
+set target = 1
+where num >0;
+
+update heart_ml_cleveland
+set target = 0
+where num =0;
+commit;
+
+
+
+alter table heart_cardio_train
+add column age_yrs integer;
+
+
+update heart_cardio_train
+set age_yrs = age/365;
+commit;
+
+alter table heart_cardio_train
+add column weight_lbs double precision;
+
+update heart_cardio_train
+set weight_lbs = weight*2.20462;
+commit;
+
+alter table heart_cardio_train
+add column height_inches double precision;
+
+update heart_cardio_train
+set height_inches = height*0.393701;
+commit;
+
+alter table heart_cardio_train
+add column bmi double precision;
+
+update heart_cardio_train
+set bmi = weight/(height*0.01);
+
+-- BMI=Formula: weight (kg) / [height (m)]2
+-- The formula for BMI is weight in kilograms divided by height in meters squared. 
+-- If height has been measured in centimeters, divide by 100 to convert this to meters.
+
+	
+-- BMI=Formula: 703 x weight (lbs) / [height (in)]2
+
+-- When using English measurements, pounds should be divided by inches squared. 
+-- This should then be multiplied by 703 to convert from lbs/inches2 to kg/m2.
+
 -- add primary key for work with python flask sqlalchemy base automap
 ALTER TABLE heart_behavior_risk ADD COLUMN id SERIAL PRIMARY KEY;
-ALTER TABLE heart_behavior_risk ADD PRIMARY KEY (id);
+
+ALTER TABLE heart_cardio_train ADD PRIMARY KEY (id);
+
+ALTER TABLE heart_ml_cleveland ADD COLUMN id SERIAL PRIMARY KEY;
+
+ALTER TABLE heart_mortality ADD COLUMN id SERIAL PRIMARY KEY;
+
+ALTER TABLE heart_nhis ADD COLUMN id SERIAL PRIMARY KEY;
+
+ALTER TABLE heart_patient ADD PRIMARY KEY (id);
+

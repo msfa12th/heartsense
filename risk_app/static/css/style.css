@@ -18,6 +18,22 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
+    background-color: rgb(189, 188, 188);
+}
+
+.jumbotron
+{ 
+  color: gray;
+  background-color: black;
+  background-image: url("../../static/img/gif1.gif");
+  background-size: 125% 90%;
+  margin-bottom:0
+}
+
+.container
+{ 
+  color: white;
+  background-color: rgb(221, 217, 217);
 }
 
 #map, #mapChoropleth, #mapLayers { 
@@ -26,12 +42,6 @@ body {
   margin: 0px; 
 } 
 
-
-.jumbotron
-{ 
-  color: rgb(48, 27, 1);
-  background-color: rgb(241, 247, 203);
-}
 
 
 .info {
