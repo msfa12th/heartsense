@@ -397,3 +397,27 @@ ALTER TABLE heart_nhis ADD COLUMN id SERIAL PRIMARY KEY;
 
 ALTER TABLE heart_patient ADD PRIMARY KEY (id);
 
+-- cleanup cardio train data
+delete from heart_cardio_train
+where ap_hi < 70;
+delete from heart_cardio_train
+where ap_hi > 240;
+delete 
+from heart_cardio_train
+where height_inches > 84;
+delete 
+from heart_cardio_train
+where height_inches <48;
+
+delete from heart_cardio_train
+where ap_lo < 40;
+delete from heart_cardio_train
+where ap_lo > 160;
+delete 
+from heart_cardio_train
+where weight_lbs <75;
+
+chol - desireable, borderline, high
+
+
+
