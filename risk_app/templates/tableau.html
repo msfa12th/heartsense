@@ -2,10 +2,46 @@
 <html>
 
 <head>
-    <title>Heartsense - Tableau Dashboard Demo</title>
+    <title>Heartsense - Tableau Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">
+            <img title="Go to Home Page" src="static/img/logo2.jpg" width="125" height="40" class="rounded" alt="Lub Dub Team"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <!-- <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/visual">Visualizations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cleveland">Machine Learning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/predict">Predictions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/data">The Data </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/team">The Team</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="container">
     <h5>This is my super awesome Heartsense Tableau dashboard online</h5>
     <div class='tableauPlaceholder' id='viz1580775175571' style='position: relative'><noscript><a href='#'><img alt=' '
                     src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bi&#47;Bike-CustomerSummary&#47;Sheet2&#47;1_rss.png'
@@ -47,6 +83,7 @@
             <param name='filter' value='publish=yes' /></object></div>
     <script
         type='text/javascript'>                    var divElement = document.getElementById('viz1580947134937'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
 </body>
 
 </html>

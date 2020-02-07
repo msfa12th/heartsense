@@ -43,14 +43,43 @@ Heart_ml_cleveland = Base.classes.heart_ml_cleveland
 Heart_mortality = Base.classes.heart_mortality
 Heart_nhis = Base.classes.heart_nhis
 Heart_patient = Base.classes.heart_patient
-# Doctors = Base.classes.doctors
-# Patients = Base.classes.patients
 
 
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html", )
+
+@app.route('/predict')
+def predict():
+    return render_template("predictCardioRisk.html", )
+
+@app.route('/cleveland')
+def cleveland():
+    return render_template("predictCleveland.html", )
+
+@app.route('/visual')
+def visual():
+    return render_template("tableau.html", )
+
+@app.route('/team')
+def team():
+    return render_template("team.html", )
+
+@app.route('/data')
+def data():
+    results = db.session.query(Behaviors.Year, func.count(Behaviors.id).label('numRows')).group_by(Behaviors.Year).order_by(Behaviors.Year).all()
+
+    # for s in results:
+    #     output.append({'Year' : s['Year'],'NumRows' : s['numRows']})
+  
+    # return jsonify(results)
+    return render_template("index.html", rows=results)
+
+
+@app.route('/hello')
+def hello():
+    return "Hello World!"
 
 @app.route("/bootstrap")
 def boostrap():
@@ -62,20 +91,6 @@ def boostrap():
 def bkp():
     """Return the homepage."""
     return render_template("index-bkp.html", )
-
-@app.route('/hello')
-def hello():
-    return "Hello World!"
-
-@app.route('/test')
-def test():
-    results = db.session.query(Behaviors.Year, func.count(Behaviors.id).label('numRows')).group_by(Behaviors.Year).order_by(Behaviors.Year).all()
-
-    # for s in results:
-    #     output.append({'Year' : s['Year'],'NumRows' : s['numRows']})
-  
-    # return jsonify(results)
-    return render_template("index.html", rows=results)
 
 @app.route('/patientinfo')
 def get_patientinfo():
@@ -89,6 +104,23 @@ def get_patientinfo():
 def hello_name(name):
     return "Hello {}!".format(name)
 
+@app.route('/survey', methods=['GET'])
+def get_survey():
+    myAge = request.args.get['age']
+    myGender = request.args.get['gender']
+    myHeight = request.args.get['height']
+    myWeight = request.args.get['weight']
+    myAP_hi = request.args.get['ap_hi']
+    myAP_lo = request.args.get['ap_lo']
+    myCholestorol = request.args.get['cholestorol']
+    myGlucose = request.args.get['glucose']
+    mySmoker = request.args.get['smoke']
+    myAlcohol = request.args.get['alcohol']
+    myActive = request.args.get['active']
+    return "Age : {}, Gender: {}, Height: {}, Weight: {}".format(myAge,myGender,myHeight,myWeight)
+
+
+# db.session.add(Heart_patient,myAge)
 @app.route("/details")
 def get_book_details():
     #  how to : {route}?author=<str>&published=<str>
