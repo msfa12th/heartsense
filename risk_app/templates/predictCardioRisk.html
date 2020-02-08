@@ -76,7 +76,7 @@
         </div>
         <!--div intro-->
 
-        <form id="patientForm" class="form-Survey" action="/survey" method="post" role="form">
+        <form id="patientCRForm" class="form-Survey" action="/resultCR" method="POST" role="form">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h1 style="text-align:center">Please complete this brief survey and watch our trained AI agent 
@@ -168,10 +168,12 @@
                         <!-- <button id="cardioSubmit" class="button" value='Submit' -->
                             <!-- onclick="cardioPredict()">Submit</button> -->
                             <!-- <input name="Submit" type="submit" value="Submit"> -->
-                        <button id="cardioSubmit" class="btn btn-lg btn-primary btn-block" type="button">Submit</button>
-
+                        <button id="cardioSubmit" class="btn btn-sm btn-primary" type="submit">Submit</button>
 
                     </p>
+                    {% for e in prediction %}
+                    <h2>{{e}}</h2>
+                    {% endfor %}
                 </div>
             </div>
         </form>

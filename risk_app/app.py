@@ -130,20 +130,7 @@ def get_surveyInput():
 
 # db.session.add(Heart_patient,myAge)
 
-@app.route("/survey2")
-def get_survey2():
-    age=request.args.get('age')
-    gender=request.args.get('gender')
-    height=request.args.get('height')
-    weight=request.args.get('weight')
-    aphi=request.args.get('aphi')
-    aplo=request.args.get('aplo')
-    cholesterol=request.args.get('cholesterol')
-    glucose=request.args.get('glucose')
-    smoker=request.args.get('smoker')
-    alcohol=request.args.get('alcohol')
-    active=request.args.get('active')
-    return "Age : {}, Gender: {}".format(age,gender)
+
 
 @app.route("/details")
 def get_book_details():
@@ -160,14 +147,13 @@ def ValueClevelandPredictor(to_predict_list):
     return result[0]
 
 def ValueCardioRiskPredictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape(1,9)
+    to_predict = np.array(to_predict_list).reshape(1,11)
     loaded_model = pickle.load(open("svc_best_model_cardio.pkl","rb"))
     result = loaded_model.predict(to_predict)
     return result[0]
 
-
-@app.route('/result',methods = ['POST'])
-def result():
+@app.route('/resultCR',methods = ['POST'])
+def resultCR():
     if request.method == 'POST':
         to_predict_list = request.form.to_dict()
         to_predict_list=list(to_predict_list.values())
@@ -179,7 +165,22 @@ def result():
         else:
             prediction='Absence of heart disease'
             
-        return render_template("predictor.html",prediction=prediction)
+        return render_template("predictCardioRisk.html",prediction=prediction)
+
+@app.route('/resultCleveland',methods = ['POST'])
+def resultCleveland():
+    if request.method == 'POST':
+        to_predict_list = request.form.to_dict()
+        to_predict_list=list(to_predict_list.values())
+        to_predict_list = list(map(int, to_predict_list))
+        result = ValueClevelandPredictor(to_predict_list)
+        
+        if int(result)==1:
+            prediction='Presence of heart disease'
+        else:
+            prediction='Absence of heart disease'
+            
+        return render_template("predictCleveland.html",prediction=prediction)
 
 
 

@@ -67,8 +67,7 @@
       </div>
     </div>
     <!--div intro-->
-
-    <form id="patientForm">
+    <form id="patientClevelandForm" class="form-Survey" action="/resultCleveland" method="POST" role="form">
       <div class="panel panel-default">
         <div class="panel-body">
           <h1 style="text-align:center">Please input your medical parameters, and watch our trained AI try to predict
@@ -79,18 +78,18 @@
           <div class="row">
             <div class="col">
               <p>Age</p>
-              <input id="selAge" placeholder="Age" required type="number" value="" min="21" max="85" step="1" />
+              <input name="age" id="inputAge" placeholder="Age" required type="number" value="" min="21" max="85" step="1" />
             </div>
             <div class="col">
               <p>Gender</p>
-              <select id="selSex">
+              <select name="gender" id="inputSex">
                 <option value="1">Male</option>
                 <option value="0">Female</option>
               </select>
             </div>
             <div class="col">
               <p>Any chest pain in past 30 days</p>
-              <select id="selChestPain">
+              <select name="chestpain" id="inputChestPain">
                 <option value="1">yes</option>
                 <option value="4">no</option>
               </select>
@@ -100,12 +99,12 @@
           <div class="row">
             <div class="col">
               <p>Resting blood pressure (top number (X) in X/Y)</p>
-              <input id="selBloodPressure" placeholder="Blood Pressure" required type="number" value="" min="100"
+              <input name="BloodPressure" id="inputBP" placeholder="Blood Pressure" required type="number" value="" min="100"
                 max="200" step="1" />
             </div>
             <div class="col">
               <p>Total Cholestorol Level</p>
-              <select id="selCholesterol">
+              <select name="Cholesterol" id="inputChol">
                 <option value="187">Normal (< 200)</option> <option value="230">Borderline High (200-239)</option>
                 <option value="265">High (240 and higher)</option>
               </select>
@@ -116,21 +115,21 @@
           <div class="row">
             <div class="col">
               <p>Fasting Blood Suger > 120?</p>
-              <select id="selFBloodSugar">
+              <select name="FBloodSugar" id="inputFBS">
                 <option value="0">No</option>
                 <option value="1">Yes</option>
               </select>
             </div>
             <div class="col">
               <p>Resting ECG?</p>
-              <select id="selRestECG">
+              <select name="RestECG" id="inputRECG">
                 <option value="0">Normal</option>
                 <option value="2">Abnormal</option>
               </select>
             </div>
             <div class="col">
               <p>Max Heart Rate (input value between 75-200)</p>
-              <input id="selMaxHeartRate" placeholder="Max Heart Rate" required type="number" value="" min="75"
+              <input id="inputMHeartRate" name="MaxHeartRate" placeholder="Max Heart Rate" required type="number" value="" min="75"
                 max="200" step="1" />
             </div>
           </div>
@@ -139,7 +138,7 @@
           <div class="row">
             <div class="col">
               <p>Do you experience chest pain when you do high intensity exercise (ie running)</p>
-              <select id="selEXANG">
+              <select id="EXANG" name="inputEXANG">
                 <option value="1">Yes</option>
                 <option value="0">No</option>
               </select>
@@ -147,8 +146,11 @@
           </div>
           <p>&nbsp;</p>
           <p>
-            <button id="clevelandSubmit" class="button" value='Submit' onclick="clevelandPredict()">Submit</button>
+            <button id="clevelandSubmit" class="btn btn-sm btn-primary" type="button">Submit</button>
           </p>
+          {% for e in prediction %}
+          <h2>{{e}}</h2>
+          {% endfor %}
         </div>
       </div>
     </form>
@@ -159,7 +161,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
 
   <!-- local js scripts -->
-  <script type="text/javascript" src="static/js/predict.js"></script>
+  <script type="text/javascript" src="static/js/predictCleveland.js"></script>
 
 </body>
 </html>
