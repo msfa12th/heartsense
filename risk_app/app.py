@@ -3,6 +3,8 @@ from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import *
 from sqlalchemy.ext.automap import automap_base
+from sklearn.svm import *
+from sklearn.externals import joblib
 
 import os
 import json
@@ -142,18 +144,20 @@ def get_book_details():
 #prediction function
 def ValueClevelandPredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1,13)
-    loaded_model = pickle.load(open("knn_best_model.pkl","rb"))
+    # loaded_model = pickle.load(open("knn_best_model.pkl","rb"))
+    loaded_model = joblib.load(open("knn_best_model.pkl","rb"))
     result = loaded_model.predict(to_predict)
     return result[0]
 
 def ValueCardioRiskPredictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape(1,11)
-    loaded_model = pickle.load(open("svc_best_model_cardio.pkl","rb"))
+    to_predict = np.array(to_predict_list).reshape(1,9)
+    # loaded_model = pickle.load(open("svc_best_model_cardio.pkl","rb"))
+    loaded_model = joblib.load(open("svc_best_model_cardio.pkl","rb"))
     result = loaded_model.predict(to_predict)
     return result[0]
 
-@app.route('/resultCR',methods = ['POST'])
-def resultCR():
+@app.route('/resultCRorig',methods = ['POST'])
+def resultCRorig():
     if request.method == 'POST':
         to_predict_list = request.form.to_dict()
         to_predict_list=list(to_predict_list.values())
@@ -167,6 +171,25 @@ def resultCR():
             
         return render_template("predictCardioRisk.html",prediction=prediction)
 
+@app.route('/resultCR',methods = ['POST'])
+def resultCR():
+    if request.method == 'POST':    
+        int_features = [int(x) for x in request.form.values()]
+        final_features = [np.array(int_features)]
+        loaded_model = joblib.load(open("svc_best_model_cardio.pkl","rb"))
+        result = loaded_model.predict(final_features)
+        
+        if int(result)==1:
+            prediction='Presence of heart disease'
+        else:
+            prediction='Absence of heart disease'
+            
+        return render_template("predictCardioRisk.html",prediction=prediction)
+
+
+    output = round(prediction[0], 2)
+
+    return render_template('index.html', prediction_text='Sales should be $ {}'.format(output))
 @app.route('/resultCleveland',methods = ['POST'])
 def resultCleveland():
     if request.method == 'POST':
