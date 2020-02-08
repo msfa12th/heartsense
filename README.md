@@ -41,7 +41,7 @@ The app is deployed at (Heroku link)
 
 
 
-# Heroku Deployment (Explain the app and deployment) (Emi)
+# Heroku Deployment (Explain the app and deployment) (Emi, make a giff/video of the app that navigate through all tabs and monitors risk and put that here when the app is ready)
 
 
 
