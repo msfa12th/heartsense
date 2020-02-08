@@ -14,7 +14,7 @@ The app is deployed at (Heroku link)
 
 
 
-# Visualizations (ESarah, Gargi)
+# Visualizations (Sarah, Gargi)
 
 
 
