@@ -1,12 +1,13 @@
-from flask import Flask, request
+#importing libraries
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import *
-
-# import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
+
 import os
 import json
+import numpy as np
+import pickle
 
 app = Flask(__name__)
 
@@ -46,6 +47,7 @@ Heart_patient = Base.classes.heart_patient
 
 
 @app.route("/")
+@app.route("/index")
 def index():
     """Return the homepage."""
     return render_template("index.html", )
@@ -104,30 +106,83 @@ def get_patientinfo():
 def hello_name(name):
     return "Hello {}!".format(name)
 
-@app.route("/survey")
+@app.route("/survey", methods=['POST'])
 # @app.route('/survey', methods=['GET'])
-def get_survey():
-    myAge = request.args.get('age')
-    myGender = request.args.get('gender')
-    myHeight = request.args.get('height')
-    myWeight = request.args.get('weight')
-    myAPhi = request.args.get('aphi')
-    myAPlo = request.args.get('aplo')
-    myCholestorol = request.args.get('cholestorol')
-    myGlucose = request.args.get('glucose')
-    mySmoker = request.args.get('smoke')
-    myAlcohol = request.args.get('alcohol')
-    myActive = request.args.get('active')
+# @app.route("/survey")
+def get_surveyInput():
+    myAge = request.form['age']
+    myGender = request.form['gender']
+    myHeight = request.form['height']
+    myWeight = request.form['weight']
+    myAPhi = request.form['ap_hi']
+    myAPlo = request.form['ap_lo']
+    myCholestorol = request.form['cholestorol']
+    myGlucose = request.form['glucose']
+    mySmoker = request.form['smoke']
+    myAlcohol = request.form['alcohol']
+    myActivity = request.form['active']
     return "Age : {}, Gender: {}, Height: {}, Weight: {}".format(myAge,myGender,myHeight,myWeight)
+    # return("Hello World")
 
+    # return json.dumps({'status':'OK','age':myAge,'gender':myGender,'height':myHeight,
+    #     'weight':myWeight,'aphi':myAPhi, 'aplo':myAPlo,'cholesterol':myCholestorol,
+    #     'glucose':myGlucose,'smoke':mySmoker,'alcohol':myAlcohol,'active':myActivity})
 
 # db.session.add(Heart_patient,myAge)
+
+@app.route("/survey2")
+def get_survey2():
+    age=request.args.get('age')
+    gender=request.args.get('gender')
+    height=request.args.get('height')
+    weight=request.args.get('weight')
+    aphi=request.args.get('aphi')
+    aplo=request.args.get('aplo')
+    cholesterol=request.args.get('cholesterol')
+    glucose=request.args.get('glucose')
+    smoker=request.args.get('smoker')
+    alcohol=request.args.get('alcohol')
+    active=request.args.get('active')
+    return "Age : {}, Gender: {}".format(age,gender)
+
 @app.route("/details")
 def get_book_details():
     #  how to : {route}?author=<str>&published=<str>
     author=request.args.get('author')
     published=request.args.get('published')
     return "Author : {}, Published: {}".format(author,published)
+
+#prediction function
+def ValueClevelandPredictor(to_predict_list):
+    to_predict = np.array(to_predict_list).reshape(1,13)
+    loaded_model = pickle.load(open("knn_best_model.pkl","rb"))
+    result = loaded_model.predict(to_predict)
+    return result[0]
+
+def ValueCardioRiskPredictor(to_predict_list):
+    to_predict = np.array(to_predict_list).reshape(1,9)
+    loaded_model = pickle.load(open("svc_best_model_cardio.pkl","rb"))
+    result = loaded_model.predict(to_predict)
+    return result[0]
+
+
+@app.route('/result',methods = ['POST'])
+def result():
+    if request.method == 'POST':
+        to_predict_list = request.form.to_dict()
+        to_predict_list=list(to_predict_list.values())
+        to_predict_list = list(map(int, to_predict_list))
+        result = ValueCardioRiskPredictor(to_predict_list)
+        
+        if int(result)==1:
+            prediction='Presence of heart disease'
+        else:
+            prediction='Absence of heart disease'
+            
+        return render_template("predictor.html",prediction=prediction)
+
+
+
 
 if __name__ == '__main__':
     app.run()
