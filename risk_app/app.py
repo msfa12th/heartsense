@@ -104,19 +104,20 @@ def get_patientinfo():
 def hello_name(name):
     return "Hello {}!".format(name)
 
-@app.route('/survey', methods=['GET'])
+@app.route("/survey")
+# @app.route('/survey', methods=['GET'])
 def get_survey():
-    myAge = request.args.get['age']
-    myGender = request.args.get['gender']
-    myHeight = request.args.get['height']
-    myWeight = request.args.get['weight']
-    myAP_hi = request.args.get['ap_hi']
-    myAP_lo = request.args.get['ap_lo']
-    myCholestorol = request.args.get['cholestorol']
-    myGlucose = request.args.get['glucose']
-    mySmoker = request.args.get['smoke']
-    myAlcohol = request.args.get['alcohol']
-    myActive = request.args.get['active']
+    myAge = request.args.get('age')
+    myGender = request.args.get('gender')
+    myHeight = request.args.get('height')
+    myWeight = request.args.get('weight')
+    myAPhi = request.args.get('aphi')
+    myAPlo = request.args.get('aplo')
+    myCholestorol = request.args.get('cholestorol')
+    myGlucose = request.args.get('glucose')
+    mySmoker = request.args.get('smoke')
+    myAlcohol = request.args.get('alcohol')
+    myActive = request.args.get('active')
     return "Age : {}, Gender: {}, Height: {}, Weight: {}".format(myAge,myGender,myHeight,myWeight)
 
 

@@ -14,7 +14,7 @@ function cardioPredict(event) {
     console.log(document.getElementById("myActivity").value);
 
 
-    url="/survey/?"
+    url="/survey?"
     url=url + "age=" + document.getElementById("myAge").value;
     url=url + "&gender=" + document.getElementById("myGender").value;
     url=url + "&height=" + document.getElementById("myHeight").value;
@@ -28,12 +28,9 @@ function cardioPredict(event) {
     url=url + "&activity=" + document.getElementById("myActivity").value;
 
     console.log(url);
-    // Http = newXMLHttpRequest
-    // Http.open('POST', url, true)
 
     const Http = new XMLHttpRequest();
-    Http.open("POST", url);
-    // Http.send();
+    Http.open("POST", url,true);
 
     return;
   }
