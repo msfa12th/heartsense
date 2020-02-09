@@ -7,6 +7,7 @@ The app is deployed at (Heroku link)
 
 # Data (ETL and App Integration) (Mary)
 Original Source Data (extraction, transformation and load):
+
 Pulled source data in CSV format from two websites 
 1. Cleveland - https://archive.ics.uci.edu/ml/datasets/Heart+Disease
   Heart Disease Data Set originally from the University of California, Irvine Machine Learning Repository
@@ -24,8 +25,8 @@ Loaded the data into PostGreSQL database in an AWS S3 bucket (via Jupyter Notebo
  Cleveland data didn't have column headers so table created with generic column names
 
 NEW TABLES:
-heart_ml_cleveland
-heart_cardio_risk
+1. heart_ml_cleveland
+2. heart_cardio_risk
 
 Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
 1. Cleveland data
@@ -43,8 +44,8 @@ Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
      weight_lbs = weight*2.20462 (original weight in kg)
      bmi = kg/m2 (weight/(height*0.01)(height*0.01))
      bmi_category (underweight: bmi<18.5, healthy weight: 18.5<=bmi<25, overweight: 25<=bmi<30, obese: bmi>=30)
-   data cleanup:
-     deleted records that seem invalid/unnecessary
+
+   data cleanup (deleted records that seem invalid/unnecessary):
      1. deleted records with systolic bp (ap_hi)<70
      2. deleted records with diastolic bp (ap_hi)>240
      3. deleted records with systolic bp (ap_lo)<40
@@ -55,11 +56,11 @@ Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
      8. check for duplicate rows, deleted 34 rows
 
 INPUT DATA (ETL/App Integration)
-Created forms to gather input data from user
-Used python flask/javascript to capture the data and feed to the ML model
-Within python flask app, created additional calculated data based on user input
+1. Created forms to gather input data from user
+2  Used python flask/javascript to capture the data and feed to the ML model
+3. Within python flask app, created additional calculated data based on user input
  to feed into the machine learning model.
-Called the ML model and sent the model out to a route to output results on HTML page
+4. Called the ML model and sent the model out to a route to output results on HTML page
 
 
 
