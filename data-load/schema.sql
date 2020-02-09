@@ -485,4 +485,4 @@ set bmi = weight/(height*0.01*height*0.01);
 alter table heart_cardio_train
 add column bmi_category text;
 
---round calculated numbers to 2 decimal places
+
