@@ -56,11 +56,10 @@ Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
      8. check for duplicate rows, deleted 34 rows
 
 INPUT DATA (ETL/App Integration)
-1. Created forms to gather input data from user
-2  Created RESTful API using python flask/javascript to capture the data and feed to the ML model
-3. Within python flask app, created additional calculated data based on user input
- to feed into the machine learning model.
-4. Called the ML model and sent the model out to a route to output results on HTML page
+  1. Created forms to gather input data from user
+  2. Created RESTful API using python flask/javascript to capture the data and feed to the ML model
+  3. Within python flask app, created additional calculated data based on user input to feed into the machine learning model.
+  4. Called the ML model and sent the model out to a route to output results on HTML page
 
 
 
