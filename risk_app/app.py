@@ -150,14 +150,14 @@ def ValueClevelandPredictor(to_predict_list):
     return result[0]
 
 def ValueCardioRiskPredictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape(1,9)
+    to_predict = np.array(to_predict_list).reshape(1,15)
     # loaded_model = pickle.load(open("svc_best_model_cardio.pkl","rb"))
     loaded_model = joblib.load(open("svc_best_model_cardio.pkl","rb"))
     result = loaded_model.predict(to_predict)
     return result[0]
 
-@app.route('/resultCRorig',methods = ['POST'])
-def resultCRorig():
+@app.route('/resultCR',methods = ['POST'])
+def resultCR():
     if request.method == 'POST':
         to_predict_list = request.form.to_dict()
         to_predict_list=list(to_predict_list.values())
@@ -171,8 +171,8 @@ def resultCRorig():
             
         return render_template("predictCardioRisk.html",prediction=prediction)
 
-@app.route('/resultCR',methods = ['POST'])
-def resultCR():
+@app.route('/resultCRnew',methods = ['POST'])
+def resultCRnew():
     if request.method == 'POST':    
         int_features = [int(x) for x in request.form.values()]
         final_features = [np.array(int_features)]

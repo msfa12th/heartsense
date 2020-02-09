@@ -5,7 +5,7 @@ According to the WHO, cardiovascular diseases (CVDs) are the number one cause of
 
 The app is deployed at (Heroku link)
 
-# Data Source (ETL)(Mary)
+# Data Source (ETL and App Integration)(Mary)
 
 
 

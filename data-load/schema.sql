@@ -355,24 +355,46 @@ set age_yrs = age/365;
 commit;
 
 alter table heart_cardio_train
-add column weight_lbs double precision;
+add column weight_lbs numeric;
 
 update heart_cardio_train
-set weight_lbs = weight*2.20462;
+set weight_lbs = round(cast(weight*2.20462 as numeric),2);
+commit;
+
+
+alter table heart_cardio_train
+add column height_inches numeric;
+
+update heart_cardio_train
+set height_inches = round(cast(height*0.393701 as numeric),2);
 commit;
 
 alter table heart_cardio_train
-add column height_inches double precision;
+add column bmi numeric;
 
 update heart_cardio_train
-set height_inches = height*0.393701;
-commit;
+set bmi = round(cast(weight/(height*0.01*height*0.01) as numeric),2);
 
 alter table heart_cardio_train
-add column bmi double precision;
+add column bmi_category text;
 
 update heart_cardio_train
-set bmi = weight/(height*0.01);
+set bmi_category='Underweight'
+where bmi <18.5;
+
+update heart_cardio_train
+set bmi_category='Healthy Weight'
+where bmi >= 18.5 and bmi <25;
+
+update heart_cardio_train
+set bmi_category='Overweight'
+where bmi >= 25 and bmi <30;
+
+update heart_cardio_train
+set bmi_category='Obese'
+where bmi >=30;
+commit;
+
 
 -- BMI=Formula: weight (kg) / [height (m)]2
 -- The formula for BMI is weight in kilograms divided by height in meters squared. 
@@ -416,8 +438,51 @@ where ap_lo > 160;
 delete 
 from heart_cardio_train
 where weight_lbs <75;
+--after these deletes we are left with 68662 records
 
-chol - desireable, borderline, high
+-- find and delete duplicate records
+-- 24 duplicates need to be deleted
+with main_query as
+(	select age,gender,height,weight,ap_hi,ap_lo,cholesterol,
+	 gluc,smoke,alco,active,cardio,age_yrs,weight_lbs,height_inches,
+	  bmi,count(*)
+	 from heart_cardio_train
+	 group by age,gender,height,weight,ap_hi,ap_lo,cholesterol,
+	 gluc,smoke,alco,active,cardio,age_yrs,weight_lbs,height_inches,
+	  bmi
+	having count(*) > 1
+ )
+ select count(*) from main_query;
 
+DELETE
+FROM
+    heart_cardio_train a
+        USING heart_cardio_train b
+WHERE
+    a.id > b.id
+    AND a.age=b.age
+	and a.gender=b.gender
+	and a.height=b.height
+	and a.weight=b.weight
+	and a.ap_hi=b.ap_hi
+	and a.ap_lo=b.ap_lo
+	and a.cholesterol=b.cholesterol
+	and a.gluc=b.gluc
+	and a.smoke=b.smoke
+	and a.alco=b.alco
+	and a.active=b.active
+	and a.cardio=b.cardio;
 
+commit;
 
+--realized a flaw in the BMI calculation
+-- =kg/m2 => weight divided by (height squared)
+-- change height from cm to meters by divide by 100
+update heart_cardio_train
+set bmi = weight/(height*0.01*height*0.01);
+
+--add bmi category for reports
+alter table heart_cardio_train
+add column bmi_category text;
+
+--round calculated numbers to 2 decimal places
