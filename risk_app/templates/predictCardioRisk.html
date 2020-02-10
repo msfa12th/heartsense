@@ -61,6 +61,8 @@
         </div>
     </nav>
     <div class="container">
+        <div id="result"><h2>{{ prediction }}</h2>
+        </div>
         <div id="intro">
             <div class="text-left" style="text-align: justify">
                 <h2 style="font-size:28px">We created a Machine Learning model utilizing the ??? classification
@@ -171,9 +173,7 @@
                         <button id="cardioSubmit" class="btn btn-sm btn-primary" type="submit">Submit</button>
 
                     </p>
-                    {% for e in prediction %}
-                    <h2>{{e}}</h2>
-                    {% endfor %}
+
                 </div>
             </div>
         </form>
