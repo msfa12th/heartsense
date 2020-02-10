@@ -41,7 +41,7 @@ Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
    created 5 new columns (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
 
      1. age_yrs = age/365 (original age in days)
-     2. height_inches = "height*0.393701" (original height in cm)
+     2. height_inches = height*0.393701 (original height in cm)
      3. weight_lbs = "weight*2.20462" (original weight in kg)
      4. bmi = kg/m2 "(weight/(height*0.01)(height*0.01))"
      5. bmi_category (underweight: bmi<18.5, healthy weight: 18.5<=bmi<25, overweight: 25<=bmi<30, obese: bmi>=30)
