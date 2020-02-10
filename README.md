@@ -74,7 +74,48 @@ INPUT DATA (ETL/App Integration)
 
 
 
-# Predictive Modelling (Harmeet)
+
+# Predictive Supervised Machine Learning:
+
+Dataset: The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
+
+Data pre-processing:
+
+Feature Engineering: A new feature was added called BMI(Basal Metabolic Index) during ETL that took information of height and weight to return BMI values of individuals. Thus the dataset now had 6 continuous variables and 6 label-encoded categorical features. 
+
+Exploratory Data Analysis:
+EDA was performed in pandas to analyze the data, identify outliers, imbalanced features, data distribution, duplicate and null values. Data munging and transformation led to formation of a clean dataset.
+
+Feature Selection:
+Following statistical tests were performed to select the best features for modeling and avoid over-fitting.
+
+1.Univariate Selection:
+The scikit-learn library provides the SelectKBest class that can be used with a suite of different statistical tests to select a specific number of features. The code below uses the chi-squared (chi²) statistical test to select 10 of the best features.
+2. Feature importance:
+Feature importance is an inbuilt class that comes with Tree Based Classifiers. Extra Tree Classifier is used for extracting the top 10 features for the dataset.
+3.Correlation Matrix with Heatmap
+Correlation heatmap is built using the seaborn library to identify which features are most related to each other or the target variable and identify redundant data and eliminate threof to reduce over-fitting.
+The following features were selected based on consensus of the processes. 
+gender, systolic pressure, diastolic pressure, cholesterol, age_yrs, weight_lbs, bmi
+ While smoke and alcohol are known to be great risk factors, but their distribution in the classes is highly imbalanced to train the model. Also, they show negative correlation with the target in the heatmap. 
+
+Scaling:
+Continuous features were standardized before data splitting into train and test set using StandardScaler such that the mean of the values was 0 and the standard deviation was 1. Categorical features were already label encoded. 
+
+Data Splitting:
+Data was splitted into random train and test subsets prior to model building. Since the target class had approximately equal ratio of datapoints, stratification was not performed. Both the train and test dataset had an approx. equal data distribution
+
+Model Building:
+The problem being addressed is a binary classification, hence the following machine learning classification algorithms were deployed for initial model building:
+1.	Logistic Regression
+2.	K Nearest Neighbors 
+3.	Support Vector Machine
+4.	Decision Tree 
+5.	Random Forest 
+6.	Naïve Bayes
+7.	Neural Network
+
+
 
 
 
