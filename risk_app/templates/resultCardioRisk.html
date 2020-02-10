@@ -62,9 +62,10 @@
     </nav>
     <div class="container">
         <div id="result">
-            <h1>CardioPredict Results</h1>
+            <h1>{{ test }} Results</h1>
             <h2>{{ prediction }} </h2>
             <h2>Patient Info Entered:</h2>  
+            <p>{{ patient }}</p>
             <p>&nbsp;</p>
                 <p>Age: {{ patient['age'] }}</p>
                 <p>Gender: {{ 'Male' if patient['gender'] == '2' else 'Female' }}</p>

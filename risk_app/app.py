@@ -157,8 +157,8 @@ def ValueCardioRiskPredictor(to_predict_list):
     result = loaded_model.predict(to_predict)
     return result[0]
 
-@app.route('/resultCRbkp',methods = ['POST'])
-def resultCRbkp():
+@app.route('/resultCRold',methods = ['POST'])
+def resultCRold():
     if request.method == 'POST':
         to_predict_list = request.form.to_dict()
         to_predict_list=list(to_predict_list.values())
@@ -172,14 +172,13 @@ def resultCRbkp():
             
         return render_template("resultCardioRisk.html",prediction=prediction)
 
-@app.route('/resultCR',methods = ['POST'])
-def resultCR():
+@app.route('/resultCRbkp',methods = ['POST'])
+def resultCRbkp():
     if request.method == 'POST': 
         patient_info = request.form.to_dict()
    
         # get 9 input values
         int_features = [int(x) for x in request.form.values()]
-        # int_features = [55,1,65,170,125,78,1,1,1]
 
         # convert input to 15 features
         feature_order = [4,5,0,3,2,8,8,6,6,6,1,1,7,7,7]
@@ -188,7 +187,6 @@ def resultCR():
         #calculate BMI 703*lbs/in2
         myFeatures[4]=round(703*myFeatures[3]/(myFeatures[4]*myFeatures[4]),2)
 
-        # myFeatures[4]=703*myFeatures[3]/(myFeatures[4])
         
         # split active feature
         myFeatures[5]= 0 if myFeatures[5] > 0 else 1
@@ -221,6 +219,41 @@ def resultCR():
             
         # return render_template("predictCardioRisk.html",prediction=result,)
         return render_template("resultCardioRisk.html",prediction=prediction,result=result[0],patient=patient_info,myBMI=myFeatures[4],myChol=myList[cholesterolValue])
+
+
+@app.route('/resultCR',methods = ['POST'])
+def resultCR():
+    if request.method == 'POST': 
+        patient_info = request.form.to_dict()
+   
+        # get 9 input values
+        int_features = [int(x) for x in request.form.values()]
+
+        # reorder the 7 features
+        feature_order = [1,4,5,6,0,3,2]
+        myFeatures = [int_features[i] for i in feature_order]
+
+        #calculate BMI 703*lbs/in2
+        myFeatures[6]=round(703*myFeatures[5]/(myFeatures[6]*myFeatures[6]),2)
+        
+        # split active feature
+        myFeatures[5]= 0 if myFeatures[5] > 0 else 1
+
+        final_features = [np.array(myFeatures)]
+        loaded_model = joblib.load(open("svc_best_model_cardio.pkl","rb"))
+        result = loaded_model.predict(final_features)
+
+        myList = ['Empty','Normal (< 200)', 'Borderline High (200-239)', 'High (240 and higher)']
+        cholesterolValue = int(patient_info['cholesterol'])
+
+        if int(result)==1:
+            prediction='Presence of heart disease'
+        else:
+            prediction='Absence of heart disease'
+            
+        # return render_template("predictCardioRisk.html",prediction=result,)
+        return render_template("resultCardioRisk.html",test='Cardio SVC Risk',prediction=prediction,result=result[0],patient=patient_info,myBMI=myFeatures[4],myChol=myList[cholesterolValue])
+
 
 
 @app.route('/resultClevelandBkp',methods = ['POST'])
@@ -281,7 +314,7 @@ def resultCleveland():
         else:
             prediction='Absence of heart disease'
             
-        return render_template("predictCardioRisk.html",prediction=prediction)
+        return render_template("resultCardioRisk.html",test='Cleveland KNN Risk',prediction=prediction,result=result[0],patient=patient_info,myBMI=myFeatures[4],myChol=myList[cholesterolValue])
 
 
 
