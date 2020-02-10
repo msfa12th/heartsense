@@ -1,4 +1,5 @@
-	https://img.shields.io/github/issues/msfa12th/heartsense
+https://img.shields.io/github/issues/msfa12th/heartsense
+
 # LUB DUB : A Machine Learning Based App for Non-invasive Diagnosis of Heart Disease.
 
 # Summary:
