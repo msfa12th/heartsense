@@ -108,13 +108,21 @@ Data was splitted into random train and test subsets prior to model building. Si
 
 Model Building:
 The problem being addressed is a binary classification, hence the following machine learning classification algorithms were deployed for initial model building:
-1.	Logistic Regression
-2.	K Nearest Neighbors 
-3.	Support Vector Machine
-4.	Decision Tree 
-5.	Random Forest 
-6.	Naïve Bayes
-7.	Neural Network
+1.	Logistic Regression: Using default parameters the score was 72.63.
+
+2.	K Nearest Neighbors : The classification parameters are values of neighbors (k) and distance. Different values of neighbours were used (k=1 to 20) to check the best output score. Best score was obtained for k= 19 at 72.19.
+
+3.	Support Vector Machine: SVC was tested for all the kernels i.e. 'linear', 'poly', 'rbf', 'sigmoid'. Best score was obtained for ‘rbf’ at 73.09. 
+
+4.	Decision Tree: Randomness of a tree is determined by parameter, ‘max_features’ . For classification max_features is set to sqrt(n_features) and best score was 64.46.
+
+5.	Random Forest: Models were built with varying number of estimators i.e. number of trees to be built. Best score  of 69.94 was obtained at estimator=1000.
+
+
+6.	Naïve Bayes: Model was built using GaussianNB classifier with a score of 71.23.
+
+7.	Neural Network: Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
+
 
 
 
