@@ -83,7 +83,7 @@ was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal"
 For Blood Pressure two different coloumns were there, one for systolic(Ap hi) and another for diastolic(Ap lo) pressure. For that one 
 common column was created to check either blood pressure is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as 
 "Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 
-"Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal,
+"Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal",
 Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
 
