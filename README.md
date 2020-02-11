@@ -144,6 +144,7 @@ The problem being addressed is a binary classification, hence the following mach
 
 
 # Challenges (All)
+1. Trained models had low accuracy when all the features were used. Based off of statistical analysis and correlation matrix, key important features were selected which increased the model score.
 
 
 
