@@ -76,9 +76,16 @@ INPUT DATA (ETL/App Integration)
 ## Visualizations (Sarah, Gargi)
 Data reshape:
 Dataset: The dataset was containing  13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Presen"t).
+
 For visualization calculated field was created for target with condition, Cardio =o "Absent" else "Present".For BMI,calculated field 
-was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". For Blood Pressure two different coloumns were there, one for systolic(Ap hi) and another for diastolic(Ap lo) pressure. For that one common column was created to check either blood pressure is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as "Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal,
+was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". 
+For Blood Pressure two different coloumns were there, one for systolic(Ap hi) and another for diastolic(Ap lo) pressure. For that one 
+common column was created to check either blood pressure is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as 
+"Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 
+"Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal,
 Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
+
+
 
 
 ## Predictive Supervised Machine Learning:
