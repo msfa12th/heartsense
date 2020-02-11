@@ -10,6 +10,9 @@
 </dt>
 The app is deployed at (Heroku link)
 
+## Team members:
+Mary Brown, Harmeet Kaur, Emi Babu, Sarah Mathew, Gargi
+
 ## Data (ETL and App Integration) (Mary)
 Original Source Data (extraction, transformation and load):
 
