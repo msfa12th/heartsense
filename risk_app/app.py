@@ -237,22 +237,23 @@ def resultCR():
         myFeatures[6]=round(703*myFeatures[5]/(myFeatures[6]*myFeatures[6]),2)
         
         # split active feature
-        myFeatures[5]= 0 if myFeatures[5] > 0 else 1
+        # myFeatures[5]= 0 if myFeatures[5] > 0 else 1
 
         final_features = [np.array(myFeatures)]
-        loaded_model = joblib.load(open("svc_best_model_cardio.pkl","rb"))
+        # loaded_model = joblib.load(open("svc_best_model_cardio.pkl","rb"))
+        loaded_model = joblib.load(open("model_svc.pkl","rb"))
         result = loaded_model.predict(final_features)
 
         myList = ['Empty','Normal (< 200)', 'Borderline High (200-239)', 'High (240 and higher)']
         cholesterolValue = int(patient_info['cholesterol'])
 
         if int(result)==1:
-            prediction='Presence of heart disease'
+            prediction='Heart disease Risk, Go see a Doctor'
         else:
             prediction='Absence of heart disease'
             
         # return render_template("predictCardioRisk.html",prediction=result,)
-        return render_template("resultCardioRisk.html",test='Cardio SVC Risk',prediction=prediction,result=result[0],patient=patient_info,myBMI=myFeatures[4],myChol=myList[cholesterolValue])
+        return render_template("resultCardioRisk.html",test='Cardio SVC Risk',prediction=prediction,result=result[0],patient=patient_info,myBMI=myFeatures[6],myChol=myList[cholesterolValue])
 
 
 
