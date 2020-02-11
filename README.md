@@ -5,12 +5,12 @@
 [![GitHub license](https://img.shields.io/github/license/msfa12th/heartsense?style=for-the-badge)](https://github.com/msfa12th/heartsense)
 # LUB DUB : A Machine Learning Based App for Non-invasive Diagnosis of Heart Disease.
 
-# Summary:
+## Summary:
 <dt>According to the WHO, cardiovascular diseases (CVDs) are the number one cause of death globally, taking an estimated 17.9 million lives each year. Extensive research has identified factors that increase a person’s risk for coronary heart disease in general and heart attack in particular.The American Heart Association recommends focusing on heart disease prevention early in life. To start, assess your risk factors and work to keep them low. The sooner you identify and manage your risk factors, the better your chances of leading a heart-healthy life. This project is aimed at understanding some of the risk factors associated with heart disease and build a predictive model thereof citing the potential risk of occurrence in individuals. 
 </dt>
 The app is deployed at (Heroku link)
 
-# Data (ETL and App Integration) (Mary)
+## Data (ETL and App Integration) (Mary)
 Original Source Data (extraction, transformation and load):
 
 Pulled source data in CSV format from two websites 
@@ -72,7 +72,7 @@ INPUT DATA (ETL/App Integration)
 
 
 
-# Visualizations (Sarah, Gargi)
+## Visualizations (Sarah, Gargi)
 
 
 
@@ -81,9 +81,11 @@ INPUT DATA (ETL/App Integration)
 
 
 
-# Predictive Supervised Machine Learning:
+## Predictive Supervised Machine Learning:
 
 Dataset: The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
+
+Libraries used: Scikit-learn, Keras, Tensorflow
 
 Data pre-processing:
 
@@ -137,26 +139,28 @@ Since the scores for both Neural Network and Support Vector Machine model was ab
 
 
 
-# Conclusions (Visualizations conclusion Sarah, Gargi, Modelling: Harmeet)
+## Conclusions (Visualizations conclusion Sarah, Gargi, Modelling: Harmeet)
 
 
 
 
 
 
-# Challenges (All)
+## Challenges (All)
 1. Trained models had low accuracy when all the features were used. Based off of statistical analysis and correlation matrix, key important features were selected which increased the model score.
 2. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used. 
 
 
 
 
-# Heroku Deployment (Explain the app and deployment) (Emi, make a giff/video of the app that navigate through all tabs and monitors risk and put that here when the app is ready)
+## Heroku Deployment (Explain the app and deployment) (Emi, make a giff/video of the app that navigate through all tabs and monitors risk and put that here when the app is ready)
 
 
 
-# Installations
+## Installations
+
+pip install requirements.txt
 
 
-
-# To run
+## To run locally
+Clone the repo, run app.py
