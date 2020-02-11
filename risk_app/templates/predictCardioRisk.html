@@ -61,123 +61,113 @@
         </div>
     </nav>
     <div class="container">
-        <div id="result"><h2>{{ prediction }}</h2>
-        </div>
-        <div id="intro">
-            <div class="text-left" style="text-align: justify">
-                <h2 style="font-size:28px">We created a Machine Learning model utilizing the ??? classification
-                    algorithm against the
-                    <a href="https://www.kaggle.com/sulianova/cardiovascular-disease-dataset">Kaggle Cardiovascular
-                        Disease dataset.</a></h2>
-                    <p>The dataset consists of 70,000 records of patients data, 11 features plus target.
-                    We will use our model to see if we could predict your risk for heart disease based on medical information you provide.
-                    The accuracy of this model is ???% against a test dataset. <br>
-                    This model is for predictive purposes only
-                    and should not be used as medical advice.</p>
-            </div>
-        </div>
-        <!--div intro-->
+        <div class="row">
+            <div class="col-xs-8 col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Patient Survey</h2>
+                        <form id="patientCRForm" class="form-Survey" action="/resultCR" method="POST" role="form">
 
-        <form id="patientCRForm" class="form-Survey" action="/resultCR" method="POST" role="form">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h1 style="text-align:center">Please complete this brief survey and watch our trained AI agent 
-                        predict your risk for heart disease.</h1>
-                    <div class="row">
-                        <div class="col">
-                            <p>Age</p>
-                            <input name="age" id="myAge" placeholder="Age" required autofocus type="number" value="" min="21" max="85"
-                                step="1" />
-                        </div>
-                        <div class="col">
-                            <p>Gender</p>
-                            <select id="myGender" name="gender">
-                                <option value="2">Male</option>
-                                <option value="1">Female</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <p>Height (in)</p>
-                            <input id="myHeight" name="height" placeholder="Height" required type="number" value="" min="48" max="85"
-                                step="1" />
-                        </div>
-                        <div class="col">
-                            <p>Weight (lbs)</p>
-                            <input id="myWeight" name="weight" placeholder="Weight" required type="number" value="" min="75"
-                                max="450" step="1" />
-                        </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">Age</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <input name="age" id="myAge" placeholder="Age" required autofocus type="number"
+                                        value="" min="21" max="85" step="1" />
+                                </div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">Gender</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <select id="myGender" name="gender">
+                                        <option value="2">Male</option>
+                                        <option value="1">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">Height (in)</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <input id="myHeight" name="height" placeholder="Height" required type="number"
+                                        value="" min="48" max="85" step="1" />
+                                </div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">Weight (lbs)</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <input id="myWeight" name="weight" placeholder="Weight" required type="number"
+                                        value="" min="75" max="450" step="1" />
+                                </div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">Systolic blood pressure</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <input id="myAPhi" name="ap_hi" placeholder="Blood Pressure" required type="number"
+                                        value="" min="100" max="200" step="1" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>&nbsp;</p>
+                                <div class="col-xs-6 col-md-6">Diastolic blood pressure</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <input id="myAPlo" name="ap_lo" placeholder="Blood Pressure" required type="number"
+                                        value="" min="50" max="140" step="1" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>&nbsp;</p>
+                                <div class="col-xs-6 col-md-6">Total Cholestorol Level</div>
+                                <div class="col-xs-2 col-md-2">
+                                    <select id="myCholesterol" name="cholesterol">
+                                        <option value="1">Normal (< 200)</option> <option value="2">Borderline High
+                                                (200-239)</option>
+                                        <option value="3">High (240 and higher)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p>&nbsp;</p>
+                            <button id="cardioSubmit" class="btn btn-sm btn-primary" type="submit">Submit</button>
+                        </form>
                     </div>
-
-                    <p>&nbsp;</p>
-                    <div class="row">
-                        <div class="col">
-                            <p>Systolic blood pressure<br>{ top number (X) in X/Y }</p>
-                            <input id="myAPhi" name="ap_hi" placeholder="Blood Pressure" required type="number" value=""
-                                min="100" max="200" step="1" />
-                        </div>
-                        <div class="col">
-                            <p>Diastolic blood pressure<br>{ bottom number (y) in X/Y }</p>
-                            <input id="myAPlo" name="ap_lo" placeholder="Blood Pressure" required type="number" value=""
-                                min="50" max="140" step="1" />
-                        </div>
-                        <div class="col">
-                            <p>Total Cholestorol Level</p>
-                            <select id="myCholesterol" name="cholesterol">
-                                <option value="1">Normal (< 200)</option> 
-                                <option value="2">Borderline High (200-239)</option>
-                                <option value="3">High (240 and higher)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <p>&nbsp;</p>
-                    <!-- <div class="row"> -->
-                        <!-- <div class="col">
-                            <p>Glucose (Blood Suger Level)</p>
-                            <select id="myGlucose" name="glucose">
-                                <option value="1">Normal (80-100)</option>
-                                <option value="2">Prediabetic (101-125)</option>
-                                <option value="3">Diabetic (>125)</option>
-                            </select>
-                        </div> -->
-                        <!-- <div class="col">
-                            <p>Smoker</p>
-                            <select id="mySmoker" name="smoke">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <p>Alcohol Drinker (daily/weekly)</p>
-                            <select id="myAlcohol" name="alco">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </div> -->
-                        <!-- <div class="col">
-                            <p>Active Lifestyle</p>
-                            <select id="myActivity" name="active">
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                            </select>
-                        </div> -->
-                    <!-- </div> -->
-
-
-                    <p>&nbsp;</p>
-                    <p>
-
-                        <!-- <button id="cardioSubmit" class="button" value='Submit' -->
-                            <!-- onclick="cardioPredict()">Submit</button> -->
-                            <!-- <input name="Submit" type="submit" value="Submit"> -->
-                        <button id="cardioSubmit" class="btn btn-sm btn-primary" type="submit">Submit</button>
-
-                    </p>
-
                 </div>
             </div>
-        </form>
+            {% if status == 'results' %}
+            <div class="col-xs-4 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="result">
+                            <h1>Prediction</h1>
+                            {% if result >0 %}
+                            <h4 style="color: red; text-align: center">{{ prediction }} </h4>
+                            <p style="color: red; text-align: center; text-emphasis-style: bold">Go see a Doctor!</p>
+                            {% else %}
+                            <h4 style="color: green; text-align:center">{{ prediction }} </h4>
+                            <p style="color: green; text-align: center; text-emphasis-style: bold">Keep making healthy choices!</p>
+                            {% endif %}
+                            <p>Model output is {{ result }}</P>
+                            <h2>Patient Input:</h2>
+                            <p>Age: {{ patient['age'] }}</p>
+                            <p>Gender: {{ 'Male' if patient['gender'] == '2' else 'Female' }}</p>
+                            <p>Height (inches): {{ patient['height'] }}</p>
+                            <p>Weight (pounds): {{ patient['weight'] }}</p>
+                            <p>Calculated BMI: {{ myBMI }}</p>
+                            <p>Blood Pressure: {{ patient['ap_hi'] }}/{{ patient['ap_lo'] }}</p>
+                            <p>Cholesterol: {{ myChol }}</p>
+
+                        </div>
+                        <!--div result-->
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
     </div>
+    <!--container-->
+
+
 
     <!-- Our JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
