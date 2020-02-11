@@ -128,6 +128,7 @@ The problem being addressed is a binary classification, hence the following mach
 
 7.	Neural Network: Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
 
+The machine learning model is built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005). The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
 
 
 
