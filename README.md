@@ -146,7 +146,7 @@ The machine learning model is built using Support Vector Classifier algorithm wi
 
 # Challenges (All)
 1. Trained models had low accuracy when all the features were used. Based off of statistical analysis and correlation matrix, key important features were selected which increased the model score.
-2. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) was used. 
+2. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used. 
 
 
 
