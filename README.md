@@ -11,7 +11,7 @@
 The app is deployed at (Heroku link)
 
 ## Team members:
-Mary Brown, Harmeet Kaur, Emi Babu, Sarah Mathew, Gargi
+Mary Brown, Harmeet Kaur, Emi Babu, Sarah Mathew, Gargi Paul
 
 ## Data (ETL and App Integration) (Mary)
 Original Source Data (extraction, transformation and load):
@@ -73,13 +73,18 @@ INPUT DATA (ETL/App Integration)
 
 
 
-
-
 ## Visualizations (Sarah, Gargi)
 
+Dataset: The dataset was containing  13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
 
-
-
+Data reshape:
+For visualization calculated field was created for target with condition, Cardio =0 "Absent" else "Present".For BMI,calculated field 
+was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". 
+For Blood Pressure two different coloumns were there, one for systolic(Ap hi) and another for diastolic(Ap lo) pressure. For that one 
+common column was created to check either blood pressure is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as 
+"Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 
+"Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal",
+Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
 
 
@@ -135,7 +140,7 @@ The problem being addressed is a binary classification, hence the following mach
 
 Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
 
-
+https://github.com/msfa12th/heartsense/blob/master/machine-learning/images/ML-pipeline.pdf
 
 
 
@@ -143,7 +148,15 @@ Since the scores for both Neural Network and Support Vector Machine model was ab
 
 
 ## Conclusions (Visualizations conclusion Sarah, Gargi, Modelling: Harmeet)
-
+Analysis:
+1. BMI increases with age.
+2. Age is one of the important factors for overweight. Between 50 to 60 years chances of a weight gain are more.
+3. Again it has been found that people between the age group 50 to 60 are more prone to heart disease.
+4. Males are more prone to heart disease than females.
+5. Blood pressure is really not good for the heart. Chances of heart disease are 50% more with high blood pressure.
+6. High Cholesterol is one of the major key factors for heart disease.
+7. Smoking does not show any noticeable impact.
+8. Like smoking, Alcohol also does not show any direct influence on heart disease. 
 
 
 
