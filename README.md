@@ -75,7 +75,7 @@ INPUT DATA (ETL/App Integration)
 
 ## Visualizations (Sarah, Gargi)
 
-BI Tool used: Tableau
+**BI Tool used: Tableau**
 
 Dataset: The dataset contained 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
 
@@ -88,7 +88,7 @@ common column was created to check either blood pressure is normal or high. Cond
 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal",
 Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
-Visualizations displayed:
+**Visualizations displayed:**
 1. BMI vs Age
 2. Role of Age & Weight
 3. Gender vs Age
@@ -102,18 +102,18 @@ Visualizations displayed:
 
 ## Predictive Supervised Machine Learning:
 
-Dataset: The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
+**Dataset:** The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
 
-Libraries used: Scikit-learn, Keras, Tensorflow
+**Libraries used:** Scikit-learn, Keras, Tensorflow
 
-Data pre-processing:
+**Data pre-processing:**
 
 Feature Engineering: A new feature was added called BMI(Basal Metabolic Index) during ETL that took information of height and weight to return BMI values of individuals. Thus the dataset now had 6 continuous variables and 6 label-encoded categorical features. 
 
-Exploratory Data Analysis:
+**Exploratory Data Analysis:**
 EDA was performed in pandas to analyze the data, identify outliers, imbalanced features, data distribution, duplicate and null values. Data munging and transformation led to formation of a clean dataset.
 
-Feature Selection:
+**Feature Selection:**
 Following statistical tests were performed to select the best features for modeling and avoid over-fitting.
 
 1.Univariate Selection:
@@ -123,31 +123,30 @@ Feature importance is an inbuilt class that comes with Tree Based Classifiers. E
 3.Correlation Matrix with Heatmap
 Correlation heatmap is built using the seaborn library to identify which features are most related to each other or the target variable and identify redundant data and eliminate threof to reduce over-fitting.
 The following features were selected based on consensus of the processes. 
-gender, systolic pressure, diastolic pressure, cholesterol, age_yrs, weight_lbs, bmi
+**gender, systolic pressure, diastolic pressure, cholesterol, age_yrs, weight_lbs, bmi**
  While smoke and alcohol are known to be great risk factors, but their distribution in the classes is highly imbalanced to train the model. Also, they show negative correlation with the target in the heatmap. 
 
-Scaling:
+**Scaling:**
 Continuous features were standardized before data splitting into train and test set using StandardScaler such that the mean of the values was 0 and the standard deviation was 1. Categorical features were already label encoded. 
 
-Data Splitting:
+**Data Splitting:**
 Data was splitted into random train and test subsets prior to model building. Since the target class had approximately equal ratio of datapoints, stratification was not performed. Both the train and test dataset had an approx. equal data distribution
 
-Model Building:
+**Model Building:**
 The problem being addressed is a binary classification, hence the following machine learning classification algorithms were deployed for initial model building:
-1.	Logistic Regression: Using default parameters the score was 72.63.
+1.	**Logistic Regression:** Using default parameters the score was 72.63.
 
-2.	K Nearest Neighbors : The classification parameters are values of neighbors (k) and distance. Different values of neighbours were used (k=1 to 20) to check the best output score. Best score was obtained for k= 19 at 72.19.
+2.	**K Nearest Neighbors :** The classification parameters are values of neighbors (k) and distance. Different values of neighbours were used (k=1 to 20) to check the best output score. Best score was obtained for k= 19 at 72.19.
 
-3.	Support Vector Machine: SVC was tested for all the kernels i.e. 'linear', 'poly', 'rbf', 'sigmoid'. Best score was obtained for ‘rbf’ at 73.09. 
+3.	**Support Vector Machine:** SVC was tested for all the kernels i.e. 'linear', 'poly', 'rbf', 'sigmoid'. Best score was obtained for ‘rbf’ at 73.09. 
 
-4.	Decision Tree: Randomness of a tree is determined by parameter, ‘max_features’ . For classification max_features is set to sqrt(n_features) and best score was 64.46.
+4.	**Decision Tree:** Randomness of a tree is determined by parameter, ‘max_features’ . For classification max_features is set to sqrt(n_features) and best score was 64.46.
 
-5.	Random Forest: Models were built with varying number of estimators i.e. number of trees to be built. Best score  of 69.94 was obtained at estimator=1000.
+5.	**Random Forest:** Models were built with varying number of estimators i.e. number of trees to be built. Best score  of 69.94 was obtained at estimator=1000.
 
+6.	**Naïve Bayes:** Model was built using GaussianNB classifier with a score of 71.23.
 
-6.	Naïve Bayes: Model was built using GaussianNB classifier with a score of 71.23.
-
-7.	Neural Network: Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
+7. **Neural Network:** Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
 
 Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
 
