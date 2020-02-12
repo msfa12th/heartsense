@@ -84,6 +84,11 @@ def index():
 def predict():
     return render_template("predictCardioRisk.html",status="predict" )
 
+
+@app.route('/machineln')
+def machine():
+    return render_template("machinelearning.html" )    
+
 @app.route('/visual')
 def visual():
     return render_template("tableau.html", )
