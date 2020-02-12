@@ -89,13 +89,13 @@
 
                     {% if status == 'results' %}
                     <h2>Patient Input</h2>
-                    <p>Age: {{ patient['age'] }}</p>
-                    <p>Gender: {{ 'Male' if patient['gender'] == '2' else 'Female' }}</p>
-                    <p>Height (inches): {{ patient['height'] }}</p>
-                    <p>Weight (pounds): {{ patient['weight'] }}</p>
-                    <p>Calculated BMI: {{ myBMI }}</p>
-                    <p>Blood Pressure: {{ patient['ap_hi'] }}/{{ patient['ap_lo'] }}</p>
-                    <p>Cholesterol: {{ myChol }}</p>
+                    <p style="text-align: left;">Age: {{ patient['age'] }}</p>
+                    <p style="text-align: left;">Gender: {{ 'Male' if patient['gender'] == '2' else 'Female' }}</pstyle="text-align: left;">
+                    <p style="text-align: left;">Height (inches): {{ patient['height'] }}</p>
+                    <p style="text-align: left;">Weight (pounds): {{ patient['weight'] }}</p>
+                    <p style="text-align: left;">Calculated BMI: {{ myBMI }}</p>
+                    <p style="text-align: left;">Blood Pressure: {{ patient['ap_hi'] }}/{{ patient['ap_lo'] }}</p>
+                    <p style="text-align: left;">Cholesterol: {{ myChol }}</p>
                     {% else %}
                         <h2>Patient Survey</h2>
                         <form id="patientCRForm" class="form-Survey" action="/resultCR" method="POST" role="form">
@@ -178,7 +178,6 @@
                             <h4 style="color: green; text-align:center">{{ prediction }} </h4>
                             <p style="color: green; text-align: center; text-emphasis-style: bold">Keep making healthy choices!</p>
                             {% endif %}
-                            <p>Model output is {{ result }}</P>
 
                         </div>
                         <!--div result-->
