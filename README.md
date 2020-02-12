@@ -53,7 +53,7 @@ Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/wei
 **Visualizations displayed:** 
 
 1.  BMI vs Age [Density plot]
-2.  Role of Age & Weight [Heat map]
+2.  Role of Age & Weight [Tree map]
 3.  Gender vs Age [Line plot]
 4.  Gender vs Heart Disease [Pie plot]
 5.  Blood Pressure vs Age [Area plot]
