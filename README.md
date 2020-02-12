@@ -69,16 +69,10 @@ Used SQL queries in PGADMIN  schema.sql) to clean the data
 
 Dataset: The dataset contained 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
 
-Data reshape:
-For visualization calculated field was created for target with condition, Cardio =0 "Absent" else "Present".For BMI,calculated field 
-was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". 
-For Blood Pressure two different coloumns were there, one for systolic(Ap hi) and another for diastolic(Ap lo) pressure. For that one 
-common column was created to check either blood pressure is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as 
-"Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 
-"Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal",
-Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
+Tableau's analytics was leveraged to generate trend lines and averages for the plots. For interpretation of the data, the following calculated fields were created:
+Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". For Blood Pressure one common column was created to check if BP is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as "Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal", Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
-**Visualizations displayed:**
+**Visualizations displayed:** 
 1. BMI vs Age
 2. Role of Age & Weight
 3. Gender vs Age
@@ -96,7 +90,7 @@ Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "N
 
 **Libraries used:** Scikit-learn, Keras, Tensorflow
 
-**Data pre-processing:**
+### **Data pre-processing:**
 
 Feature Engineering: A new feature was added called BMI(Basal Metabolic Index) during ETL that took information of height and weight to return BMI values of individuals. Thus the dataset now had 6 continuous variables and 6 label-encoded categorical features. 
 
@@ -108,9 +102,9 @@ Following statistical tests were performed to select the best features for model
 
 1.Univariate Selection:
 The scikit-learn library provides the SelectKBest class that can be used with a suite of different statistical tests to select a specific number of features. The code below uses the chi-squared (chi²) statistical test to select 10 of the best features.
-2. Feature importance:
+1. Feature importance:
 Feature importance is an inbuilt class that comes with Tree Based Classifiers. Extra Tree Classifier is used for extracting the top 10 features for the dataset.
-3.Correlation Matrix with Heatmap
+1.Correlation Matrix with Heatmap
 Correlation heatmap is built using the seaborn library to identify which features are most related to each other or the target variable and identify redundant data and eliminate threof to reduce over-fitting.
 The following features were selected based on consensus of the processes. 
 **gender, systolic pressure, diastolic pressure, cholesterol, age_yrs, weight_lbs, bmi**
