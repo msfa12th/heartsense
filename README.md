@@ -73,16 +73,16 @@ Tableau's analytics was leveraged to generate trend lines and averages for the p
 Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". For Blood Pressure one common column was created to check if BP is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as "Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal", Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
 **Visualizations displayed:** 
-1. BMI vs Age
-2. Role of Age & Weight
-3. Gender vs Age
-4. Gender vs Heart Disease
-5. Blood Pressure vs Age
-6. Cholesterol levels
-7. Smoking vs Blood Pressure
-8. Glucose vs Heart Disease
-9. Alcohol Consumption vs Heart Disease
-
+1.  Visualizations displayed:
+2.  BMI vs Age [Density plot]
+3.  Role of Age & Weight [Heat map]
+4.  Gender vs Age [Line plot]
+5.  Gender vs Heart Disease [Pie plot]
+6.  Blood Pressure vs Age [Area plot]
+7.  Cholesterol levels [Pie plot]
+8.  Smoking vs Blood Pressure [Bar plot]
+9.  Glucose vs Heart Disease [Circle plot]
+10. Alcohol Consumption vs Heart Disease [Bar plot]
 
 ## Predictive Supervised Machine Learning:
 
