@@ -84,6 +84,8 @@ Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/wei
 8.  Glucose vs Heart Disease [Circle plot]
 9. Alcohol Consumption vs Heart Disease [Bar plot]
 
+[Tableau Dashboard](https://public.tableau.com/profile/gargi.paul#!/vizhome/ProjectHeartsense_t/Dashboard1)
+
 ## Predictive Supervised Machine Learning:
 
 **Dataset:** The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
