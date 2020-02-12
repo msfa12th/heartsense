@@ -165,6 +165,7 @@ With age, metabolism tends to slow down which leads to obesity. Therefore, one n
 3. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
 4. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
 5. App integration with neural network model was challenging. We had issues with compatibility of newer versions of tensor flow and keras.  Had to uninstall and reinstall older version to get this to load the model.  Other tensor flow library issues, ultimately prevented us calling the NN model via the flask app.  We were planning to use the NN model to show % risk (probability), versus the YES/NO output of the SVC model.
+6. Heroku deployment - had to streamline the app, remove some functionality that was causing problems with Heroku (remove reference to Neural Network libraries tensor/keras and remove code related to postGres DB, since had difficulty setting up access from Heroku to our AWS database
 
 
 
