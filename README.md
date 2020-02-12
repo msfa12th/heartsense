@@ -8,12 +8,12 @@
 ## Summary:
 <dt>According to the WHO, cardiovascular diseases (CVDs) are the number one cause of death globally, taking an estimated 17.9 million lives each year. Extensive research has identified factors that increase a person’s risk for coronary heart disease in general and heart attack in particular.The American Heart Association recommends focusing on heart disease prevention early in life. To start, assess your risk factors and work to keep them low. The sooner you identify and manage your risk factors, the better your chances of leading a heart-healthy life. This project is aimed at understanding some of the risk factors associated with heart disease and build a predictive model thereof citing the potential risk of occurrence in individuals. 
 </dt>
-The app is deployed at (Heroku link)
+The app is deployed on Heroku (https://lubdub-heartsense.herokuapp.com/) 
 
 ## Team members:
 Mary Brown, Harmeet Kaur, Emi Babu, Sarah Mathew, Gargi Paul
 
-## Data (ETL and App Integration) (Mary)
+## Data ETL
 Original Source Data (extraction, transformation and load):
 
 Pulled source data in CSV format from two websites 
@@ -28,15 +28,17 @@ Pulled source data in CSV format from two websites
   Cardiovascular Disease dataset from Kaggle
   The dataset consists of 70,000 records of patient data, 11 features + target in CSV format.
 
-Loaded the data into PostGreSQL database in an AWS S3 bucket (via Jupyter Notebook). 
+Loaded the data into PostGreSQL database (named heartsense) in an AWS S3 bucket (via Jupyter Notebook). 
+ A locally stored file, db-properties.json contained the DB connection properties for use with Jupyter Notebook.
  Used pyspark to drop/create table inferring the column data types
  Cleveland data didn't have column headers so table created with generic column names.
 
 NEW TABLES:
 
 1. heart_cardio_risk
+2. heart_ml_cleveland
 
-Used SQL queries in PGADMIN  schema.sql) to clean the data
+Used SQL queries in PGADMIN  (schema.sql) to clean the data
 1. Cleveland data
    renamed generic columns to column names consistent with documentation on the website
    null values in the dataset were = "?", changed this to NULL
@@ -63,11 +65,11 @@ Used SQL queries in PGADMIN  schema.sql) to clean the data
 
 
 
-## Visualizations (Sarah, Gargi)
+## Visualizations
 
 **BI Tool used: Tableau**
 
-Dataset: The dataset contained 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
+Dataset: The cardio risk dataset was used for the visualizations.  It contained 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
 
 Tableau's analytics was leveraged to generate trend lines and averages for the plots. For interpretation of the data, the following calculated fields were created:
 Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". For Blood Pressure one common column was created to check if BP is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as "Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal", Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
@@ -88,7 +90,7 @@ Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/wei
 
 ## Predictive Supervised Machine Learning:
 
-**Dataset:** The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
+**Dataset:** The cardio risk dataset was used for ML.  The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
 
 **Libraries used:** Scikit-learn, Keras, Tensorflow
 
@@ -142,7 +144,7 @@ Since the scores for both Neural Network and Support Vector Machine model was ab
 
 
 ## App Integration
-An HTML form was created to gather input data from user. RESTful API was created using python flask/javascript to capture the data and feed to the ML model. Within python flask app, additional calculated data was created for bmi, based on user input to feed into the machine learning model. The ML model called was sent out to a route to output results/prediction on HTML page.
+An HTML form was created to gather input data from user. RESTful API was created using python flask/javascript to capture the data and feed to the ML model. Within python flask app, additional calculated data was created for bmi, based on user input to feed into the machine learning model. The ML model called was sent out to a route to output results/prediction on HTML page. Our DB properties were stored in local environment variables and access by our python flask app for routes that pulled data from the DB.
 
 
 ## Findings
@@ -176,4 +178,6 @@ pip install requirements.txt
 
 
 ## To run locally
-Clone the repo, run app.py
+1. Clone the repository 
+2. setup the environment variables (or comment out the DB parameters).
+3. run app.py
