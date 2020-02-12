@@ -33,10 +33,10 @@ Loaded the data into PostGreSQL database in an AWS S3 bucket (via Jupyter Notebo
  Cleveland data didn't have column headers so table created with generic column names.
 
 NEW TABLES:
-1. heart_ml_cleveland
-2. heart_cardio_risk
 
-Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
+1. heart_cardio_risk
+
+Used SQL queries in PGADMIN  schema.sql) to clean the data
 1. Cleveland data
    renamed generic columns to column names consistent with documentation on the website
    null values in the dataset were = "?", changed this to NULL
@@ -45,144 +45,128 @@ Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
    confirmed no duplicate records.
 
 2. Cardio Risk (kaggle) data
-   column names were the values of the header row in the csv
-   created 5 new columns (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
-
+   Column names were the values of the header row in the csv
+   **Feature engineering and tansformation** (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
      1. age_yrs = age/365 (original age in days)
      2. height_inches = height*0.393701 (original height in cm)
      3. weight_lbs = weight*2.20462 (original weight in kg)
      4. bmi = kg/m2 = (weight/(height\*0.01)(height\*0.01))
      5. bmi_category (underweight: bmi<18.5, healthy weight: 18.5<=bmi<25, overweight: 25<=bmi<30, obese: bmi>=30)
 
-   data cleanup (deleted records that seem invalid/unnecessary):
-     1. deleted records with systolic bp (ap_hi)<70
-     2. deleted records with diastolic bp (ap_hi)>240
-     3. deleted records with systolic bp (ap_lo)<40
-     4. deleted records with diastolic bp (ap_lo)>160
-     5. deleted records with height > 84 inches (taller than 7ft tall)
-     6. deleted records with height < 48 inches (shorter than 4ft tall)
-     7. deleted records with weight < 75 lbs 
-     8. check for duplicate rows, deleted 34 rows
-
-INPUT DATA (ETL/App Integration)
-  1. Created HTML forms to gather input data from user
-  2. Created RESTful API using python flask/javascript to capture the data and feed to the ML model
-  3. Within python flask app, created additional calculated data based on user input to feed into the machine learning model.
-  4. Called the ML model and sent the model out to a route to output results on HTML page
+   **Data cleanup** (deleted outliers):
+     1. deleted records with systolic bp (ap_hi)<70 and systolic bp (ap_lo)<40
+     2. deleted records with diastolic bp (ap_hi)>240 and diastolic bp (ap_lo)>160
+     3. deleted records with height > 84 inches (taller than 7ft tall) and < 48 inches (shorter than 4ft tall)
+     4. deleted records with weight < 75 lbs 
+     5. 34 duplicate rows deleted 
 
 
 
 
 ## Visualizations (Sarah, Gargi)
 
-BI Tool used: Tableau
+**BI Tool used: Tableau**
 
 Dataset: The dataset contained 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
 
-Data reshape:
-For visualization calculated field was created for target with condition, Cardio =0 "Absent" else "Present".For BMI,calculated field 
-was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". 
-For Blood Pressure two different coloumns were there, one for systolic(Ap hi) and another for diastolic(Ap lo) pressure. For that one 
-common column was created to check either blood pressure is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as 
-"Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 
-"Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal",
-Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
+Tableau's analytics was leveraged to generate trend lines and averages for the plots. For interpretation of the data, the following calculated fields were created:
+Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/weight in kg square. Condition for BMI was 18 to 25 = "Normal", 25 to 30 = "Over weight" and more than 30 = "Obese". For Blood Pressure one common column was created to check if BP is normal or high. Condition was (Ap lo)<=80 and (Ap hi) <=120 considered as "Normal" else "High Blood Pressure".For Gender, condition was 1= male and 2=female. Condition for Cholesterol was Cholesterol= 1 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal", Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
-Visualizations displayed:
-1. BMI vs Age
-2. Role of Age & Weight
-3. Gender vs Age
-4. Gender vs Heart Disease
-5. Blood Pressure vs Age
-6. Cholesterol levels
-7. Smoking vs Blood Pressure
-8. Glucose vs Heart Disease
-9. Alcohol Consumption vs Heart Disease
+**Visualizations displayed:** 
 
+1.  BMI vs Age [Density plot]
+2.  Role of Age & Weight [Heat map]
+3.  Gender vs Age [Line plot]
+4.  Gender vs Heart Disease [Pie plot]
+5.  Blood Pressure vs Age [Area plot]
+6.  Cholesterol levels [Pie plot]
+7.  Smoking vs Blood Pressure [Bar plot]
+8.  Glucose vs Heart Disease [Circle plot]
+9. Alcohol Consumption vs Heart Disease [Bar plot]
+
+[Tableau Dashboard](https://public.tableau.com/profile/gargi.paul#!/vizhome/ProjectHeartsense_t/Dashboard1)
 
 ## Predictive Supervised Machine Learning:
 
-Dataset: The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
+**Dataset:** The dataset had 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease absent, 1-heart disease present).
 
-Libraries used: Scikit-learn, Keras, Tensorflow
+**Libraries used:** Scikit-learn, Keras, Tensorflow
 
-Data pre-processing:
+### **Data pre-processing:**
 
 Feature Engineering: A new feature was added called BMI(Basal Metabolic Index) during ETL that took information of height and weight to return BMI values of individuals. Thus the dataset now had 6 continuous variables and 6 label-encoded categorical features. 
 
-Exploratory Data Analysis:
+**Exploratory Data Analysis:**
 EDA was performed in pandas to analyze the data, identify outliers, imbalanced features, data distribution, duplicate and null values. Data munging and transformation led to formation of a clean dataset.
 
-Feature Selection:
+**Feature Selection:**
 Following statistical tests were performed to select the best features for modeling and avoid over-fitting.
 
 1.Univariate Selection:
 The scikit-learn library provides the SelectKBest class that can be used with a suite of different statistical tests to select a specific number of features. The code below uses the chi-squared (chi²) statistical test to select 10 of the best features.
-2. Feature importance:
+1. Feature importance:
 Feature importance is an inbuilt class that comes with Tree Based Classifiers. Extra Tree Classifier is used for extracting the top 10 features for the dataset.
-3.Correlation Matrix with Heatmap
+1.Correlation Matrix with Heatmap
 Correlation heatmap is built using the seaborn library to identify which features are most related to each other or the target variable and identify redundant data and eliminate threof to reduce over-fitting.
 The following features were selected based on consensus of the processes. 
-gender, systolic pressure, diastolic pressure, cholesterol, age_yrs, weight_lbs, bmi
+**gender, systolic pressure, diastolic pressure, cholesterol, age_yrs, weight_lbs, bmi**
  While smoke and alcohol are known to be great risk factors, but their distribution in the classes is highly imbalanced to train the model. Also, they show negative correlation with the target in the heatmap. 
 
-Scaling:
+**Scaling:**
 Continuous features were standardized before data splitting into train and test set using StandardScaler such that the mean of the values was 0 and the standard deviation was 1. Categorical features were already label encoded. 
 
-Data Splitting:
+**Data Splitting:**
 Data was splitted into random train and test subsets prior to model building. Since the target class had approximately equal ratio of datapoints, stratification was not performed. Both the train and test dataset had an approx. equal data distribution
 
-Model Building:
+**Model Building:**
 The problem being addressed is a binary classification, hence the following machine learning classification algorithms were deployed for initial model building:
-1.	Logistic Regression: Using default parameters the score was 72.63.
+1.	**Logistic Regression:** Using default parameters the score was 72.63.
 
-2.	K Nearest Neighbors : The classification parameters are values of neighbors (k) and distance. Different values of neighbours were used (k=1 to 20) to check the best output score. Best score was obtained for k= 19 at 72.19.
+2.	**K Nearest Neighbors :** The classification parameters are values of neighbors (k) and distance. Different values of neighbours were used (k=1 to 20) to check the best output score. Best score was obtained for k= 19 at 72.19.
 
-3.	Support Vector Machine: SVC was tested for all the kernels i.e. 'linear', 'poly', 'rbf', 'sigmoid'. Best score was obtained for ‘rbf’ at 73.09. 
+3.	**Support Vector Machine:** SVC was tested for all the kernels i.e. 'linear', 'poly', 'rbf', 'sigmoid'. Best score was obtained for ‘rbf’ at 73.09. 
 
-4.	Decision Tree: Randomness of a tree is determined by parameter, ‘max_features’ . For classification max_features is set to sqrt(n_features) and best score was 64.46.
+4.	**Decision Tree:** Randomness of a tree is determined by parameter, ‘max_features’ . For classification max_features is set to sqrt(n_features) and best score was 64.46.
 
-5.	Random Forest: Models were built with varying number of estimators i.e. number of trees to be built. Best score  of 69.94 was obtained at estimator=1000.
+5.	**Random Forest:** Models were built with varying number of estimators i.e. number of trees to be built. Best score  of 69.94 was obtained at estimator=1000.
 
+6.	**Naïve Bayes:** Model was built using GaussianNB classifier with a score of 71.23.
 
-6.	Naïve Bayes: Model was built using GaussianNB classifier with a score of 71.23.
+7. **Neural Network:** Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
 
-7.	Neural Network: Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
-
-Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
+Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. 
+**Pipeline followed for model building is explained in the figure below:**
 
 ![Alt Text](https://github.com/msfa12th/heartsense/blob/master/ML-pipeline.png)
 
 
 
+## App Integration
+An HTML form was created to gather input data from user. RESTful API was created using python flask/javascript to capture the data and feed to the ML model. Within python flask app, additional calculated data was created for bmi, based on user input to feed into the machine learning model. The ML model called was sent out to a route to output results/prediction on HTML page.
 
 
+## Findings
+The following have been observed from Visualization analysis:
+1. BMI has a correlation with age, people tend to be more obese with age.
+2. Age is one of the important factors for weight gain. There is a higher tendency of weight gain between 50 to 60 years which puts them in a risk category for heart disease.
+3. Males are more prone to heart disease than females.
+4. Chance of heart disease is 50% more with high blood pressure.
+5. High Cholesterol is one of the major key factors for heart disease.
+6. Smoking, alcohol consumption and physical activity do not show any noticeable impact in the tested dataset.
 
-## Conclusions (Visualizations conclusion Sarah, Gargi, Modelling: Harmeet)
+## Conclusion
+With age, metabolism tends to slow down which leads to obesity. Therefore, one needs to keep check of one's diet to control sugar and fat(cholesterol) intake which may lead to higher blood pressure. While our dataset did not show significant coorelation of smoking, alcohol consumption and physical activity but these have been cited as behavioural risk factors affecting heart life. There are many other risk factors like genetic pre-disposition, salt intake etc. that have not been a aprt of the dataset and hence not analyzed. Therefore, the output of the app could be an approximate prediction. With this app, a common man can access his risk for the disease and can thereby take preventive measures to control it. This model is for predictive purposes only and should not be used as medical advice.
 
-Visualization Analysis:
-1. BMI increases with age.
-2. Age is one of the important factors for overweight. Between 50 to 60 years chances of a weight gain are more.
-3. Again it has been found that people between the age group 50 to 60 are more prone to heart disease.
-4. Males are more prone to heart disease than females.
-5. Blood pressure is really not good for the heart. Chances of heart disease are 50% more with high blood pressure.
-6. High Cholesterol is one of the major key factors for heart disease.
-7. Smoking does not show any noticeable impact.
-8. Like smoking, Alcohol also does not show any direct influence on heart disease. 
-
-
-
-
-
-## Challenges (All)
-1. Trained models had low accuracy when all the features were used. Based off of statistical analysis and correlation matrix, key important features were selected which increased the model score.
-2. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
-3. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
+## Challenges 
+1. The accuracy of the model obtained after hyperparameter tuning using GridSearch was 73%. The model would need further optimization and parameter tuning to increase the score. Since the process is highly compute intensive and time consuming, this is what could be achieved in the given time frame. 
+2. Trained models initially had very low accuracy (65%) when all the features were used. Hyperparamteter tuning did not much affect the score. Finally, based off of statistical analysis and correlation matrix, dimensional space of the features was narrowed that significantly increased the model score.
+3. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
+4. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
 
 
 
 
-## Heroku Deployment (Explain the app and deployment) (Emi, make a giff/video of the app that navigate through all tabs and monitors risk and put that here when the app is ready)
+## Heroku Deployment (giff)
 
 
 
