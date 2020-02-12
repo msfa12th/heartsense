@@ -113,7 +113,7 @@ The problem being addressed is a binary classification, hence the following mach
 
 7. **Deep Learning:** Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
 
-Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. 
+Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. The jupyter notebook "Testing_best_model_nn" has code to test the best deep learning model which could not be integrated with the app.
 
 **Pipeline followed for model building is explained in the figure below:**
 
