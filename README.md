@@ -33,10 +33,10 @@ Loaded the data into PostGreSQL database in an AWS S3 bucket (via Jupyter Notebo
  Cleveland data didn't have column headers so table created with generic column names.
 
 NEW TABLES:
-1. heart_ml_cleveland
-2. heart_cardio_risk
 
-Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
+1. heart_cardio_risk
+
+Used SQL queries in PGADMIN  schema.sql) to clean the data
 1. Cleveland data
    renamed generic columns to column names consistent with documentation on the website
    null values in the dataset were = "?", changed this to NULL
@@ -45,30 +45,20 @@ Used SQL queries in PGADMIN (kept in schema.sql) to clean the data
    confirmed no duplicate records.
 
 2. Cardio Risk (kaggle) data
-   column names were the values of the header row in the csv
-   created 5 new columns (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
-
+   Column names were the values of the header row in the csv
+   **Feature engineering and tansformation** (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
      1. age_yrs = age/365 (original age in days)
      2. height_inches = height*0.393701 (original height in cm)
      3. weight_lbs = weight*2.20462 (original weight in kg)
      4. bmi = kg/m2 = (weight/(height\*0.01)(height\*0.01))
      5. bmi_category (underweight: bmi<18.5, healthy weight: 18.5<=bmi<25, overweight: 25<=bmi<30, obese: bmi>=30)
 
-   data cleanup (deleted records that seem invalid/unnecessary):
-     1. deleted records with systolic bp (ap_hi)<70
-     2. deleted records with diastolic bp (ap_hi)>240
-     3. deleted records with systolic bp (ap_lo)<40
-     4. deleted records with diastolic bp (ap_lo)>160
-     5. deleted records with height > 84 inches (taller than 7ft tall)
-     6. deleted records with height < 48 inches (shorter than 4ft tall)
-     7. deleted records with weight < 75 lbs 
-     8. check for duplicate rows, deleted 34 rows
-
-INPUT DATA (ETL/App Integration)
-  1. Created HTML forms to gather input data from user
-  2. Created RESTful API using python flask/javascript to capture the data and feed to the ML model
-  3. Within python flask app, created additional calculated data based on user input to feed into the machine learning model.
-  4. Called the ML model and sent the model out to a route to output results on HTML page
+   **Data cleanup** (deleted outliers):
+     1. deleted records with systolic bp (ap_hi)<70 and systolic bp (ap_lo)<40
+     2. deleted records with diastolic bp (ap_hi)>240 and diastolic bp (ap_lo)>160
+     3. deleted records with height > 84 inches (taller than 7ft tall) and < 48 inches (shorter than 4ft tall)
+     4. deleted records with weight < 75 lbs 
+     5. 34 duplicate rows deleted 
 
 
 
@@ -148,40 +138,39 @@ The problem being addressed is a binary classification, hence the following mach
 
 7. **Neural Network:** Model was built by varying the number of nodes as well as depth of the model with additional layer. As it was a binary classification model, loss was set to 'binary_crossentropy' , optimizer was ‘adam’. For activation, ‘relu’ was used. Model was generated with 100 epochs. Overall accuracy was 73.1. 
 
-Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
+Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. 
+**Pipeline followed for model building is explained in the figure below:**
 
 ![Alt Text](https://github.com/msfa12th/heartsense/blob/master/ML-pipeline.png)
 
 
 
+## App Integration
+An HTML form was created to gather input data from user. RESTful API was created using python flask/javascript to capture the data and feed to the ML model. Within python flask app, additional calculated data was created for bmi, based on user input to feed into the machine learning model. The ML model called was sent out to a route to output results/prediction on HTML page.
 
 
+## Findings
+The following have been observed from Visualization analysis:
+1. BMI has a correlation with age, people tend to be more obese with age.
+2. Age is one of the important factors for weight gain. There is a higher tendency of weight gain between 50 to 60 years which puts them in a risk category for heart disease.
+3. Males are more prone to heart disease than females.
+4. Chance of heart disease is 50% more with high blood pressure.
+5. High Cholesterol is one of the major key factors for heart disease.
+6. Smoking, alcohol consumption and physical activity do not show any noticeable impact in the tested dataset.
 
-## Conclusions (Visualizations conclusion Sarah, Gargi, Modelling: Harmeet)
+## Conclusion
+With age, metabolism tends to slow down which leads to obesity. Therefore, one needs to keep check of one's diet to control sugar and fat(cholesterol) intake which may lead to higher blood pressure. While our dataset did not show significant coorelation of smoking, alcohol consumption and physical activity but these have been cited as behavioural risk factors affecting heart life. There are many other risk factors like genetic pre-disposition, salt intake etc. that have not been a aprt of the dataset and hence not analyzed. Therefore, the output of the app could be an approximate prediction. With this app, a common man can access his risk for the disease and can thereby take preventive measures to control it. This model is for predictive purposes only and should not be used as medical advice.
 
-Visualization Analysis:
-1. BMI increases with age.
-2. Age is one of the important factors for overweight. Between 50 to 60 years chances of a weight gain are more.
-3. Again it has been found that people between the age group 50 to 60 are more prone to heart disease.
-4. Males are more prone to heart disease than females.
-5. Blood pressure is really not good for the heart. Chances of heart disease are 50% more with high blood pressure.
-6. High Cholesterol is one of the major key factors for heart disease.
-7. Smoking does not show any noticeable impact.
-8. Like smoking, Alcohol also does not show any direct influence on heart disease. 
-
-
-
-
-
-## Challenges (All)
-1. Trained models had low accuracy when all the features were used. Based off of statistical analysis and correlation matrix, key important features were selected which increased the model score.
-2. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
-3. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
+## Challenges 
+1. The accuracy of the model obtained after hyperparameter tuning using GridSearch was 73%. The model would need further optimization and parameter tuning to increase the score. Since the process is highly compute intensive and time consuming, this is what could be achieved in the given time frame. 
+2. Trained models initially had very low accuracy (65%) when all the features were used. Hyperparamteter tuning did not much affect the score. Finally, based off of statistical analysis and correlation matrix, dimensional space of the features was narrowed that significantly increased the model score.
+3. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
+4. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
 
 
 
 
-## Heroku Deployment (Explain the app and deployment) (Emi, make a giff/video of the app that navigate through all tabs and monitors risk and put that here when the app is ready)
+## Heroku Deployment (giff)
 
 
 
