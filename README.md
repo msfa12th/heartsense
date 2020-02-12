@@ -75,7 +75,9 @@ INPUT DATA (ETL/App Integration)
 
 ## Visualizations (Sarah, Gargi)
 
-Dataset: The dataset was containing  13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
+BI Tool used: Tableau
+
+Dataset: The dataset contained 13 columns, 12 features and 1 target (cardio). The target has two classes (0- heart disease "Absent", 1-heart disease "Present").
 
 Data reshape:
 For visualization calculated field was created for target with condition, Cardio =0 "Absent" else "Present".For BMI,calculated field 
@@ -86,7 +88,16 @@ common column was created to check either blood pressure is normal or high. Cond
 "Normal, Cholesterol = 2 "Slightly Elevated", else "High Cholesterol".Condition for glocose was Glucose, Gluc = 1 "Normal",
 Gluc = 2 "Pre Diabetic", else "Diabetic". For Alcohol, condition was Alco = 0 "No Consumption" else "Consumption".
 
-
+Visualizations displayed:
+1. BMI vs Age
+2. Role of Age & Weight
+3. Gender vs Age
+4. Gender vs Heart Disease
+5. Blood Pressure vs Age
+6. Cholesterol levels
+7. Smoking vs Blood Pressure
+8. Glucose vs Heart Disease
+9. Alcohol Consumption vs Heart Disease
 
 
 ## Predictive Supervised Machine Learning:
@@ -140,7 +151,7 @@ The problem being addressed is a binary classification, hence the following mach
 
 Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
 
-https://github.com/msfa12th/heartsense/blob/master/machine-learning/images/ML-pipeline.pdf
+![Alt Text](https://github.com/msfa12th/heartsense/blob/master/ML-pipeline.png)
 
 
 
@@ -148,7 +159,8 @@ https://github.com/msfa12th/heartsense/blob/master/machine-learning/images/ML-pi
 
 
 ## Conclusions (Visualizations conclusion Sarah, Gargi, Modelling: Harmeet)
-Analysis:
+
+Visualization Analysis:
 1. BMI increases with age.
 2. Age is one of the important factors for overweight. Between 50 to 60 years chances of a weight gain are more.
 3. Again it has been found that people between the age group 50 to 60 are more prone to heart disease.
@@ -164,7 +176,8 @@ Analysis:
 
 ## Challenges (All)
 1. Trained models had low accuracy when all the features were used. Based off of statistical analysis and correlation matrix, key important features were selected which increased the model score.
-2. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used. 
+2. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
+3. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
 
 
 
