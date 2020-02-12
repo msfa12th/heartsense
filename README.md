@@ -140,7 +140,7 @@ The problem being addressed is a binary classification, hence the following mach
 
 Since the scores for both Neural Network and Support Vector Machine model was above 73%, they were further subjected to hyperparameter tuning using GridSearch. The models obtained were evaluated for precision, recall, F1-score. Based on the comparative analysis, the model built using Support Vector Classifier algorithm with hyperparameters (‘C’: 5, ‘gamma’: 0.005) was chosen as the final candidate model. The accuracy of the model is 73%. This model is for predictive purposes only and should not be used as medical advice.
 
-https://github.com/msfa12th/heartsense/blob/master/machine-learning/images/ML-pipeline.pdf
+![Alt Text](url)
 
 
 
