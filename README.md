@@ -33,13 +33,13 @@ Loaded the data into PostGreSQL database (named heartsense) in an AWS S3 bucket 
  Used pyspark to drop/create table inferring the column data types
  Cleveland data didn't have column headers so table created with generic column names.
 
-NEW TABLES:
+NEW TABLES in AWS postgresDB, named heartsense:
 
 1. heart_cardio_risk
 2. heart_ml_cleveland
 
 Used SQL queries in PGADMIN  (schema.sql) to clean the data
-1. Cleveland data
+1. Cleveland (UCI) data
    renamed generic columns to column names consistent with documentation on the website
    null values in the dataset were = "?", changed this to NULL
    add new calculated column based on "num" column, which is a value from 0-3, indicate level of heart disease risk
@@ -48,7 +48,7 @@ Used SQL queries in PGADMIN  (schema.sql) to clean the data
 
 2. Cardio Risk (kaggle) data
    Column names were the values of the header row in the csv
-   **Feature engineering and tansformation** (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
+   **Feature engineering and transformation** (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
      1. age_yrs = age/365 (original age in days)
      2. height_inches = height*0.393701 (original height in cm)
      3. weight_lbs = weight*2.20462 (original weight in kg)
@@ -164,7 +164,7 @@ With age, metabolism tends to slow down which leads to obesity. Therefore, one n
 2. Trained models initially had very low accuracy (65%) when all the features were used. Hyperparamteter tuning did not much affect the score. Finally, based off of statistical analysis and correlation matrix, dimensional space of the features was narrowed that significantly increased the model score.
 3. Though we could pull data from PostgreSQL database on Tableau Desktop (using student license), it wasn't possible to publish the visualization dashboard to a webpage. Hence Tableau Public was used for visualization using csv(s) imported from the database (as it didn't let direct database connectivity). 
 4. To view the embedded tableau dashboard on the html page as a whole, a specific dimension (min: 800px x 2260px and max: 1520x x 2660) had to be used.
-
+5. App integration with neural network model was challenging. We had issues with compatibility of newer versions of tensor flow and keras.  Had to uninstall and reinstall older version to get this to load the model.  Other tensor flow library issues, ultimately prevented us calling the NN model via the flask app.  We were planning to use the NN model to show % risk (probability), versus the YES/NO output of the SVC model.
 
 
 
