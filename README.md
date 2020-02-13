@@ -24,11 +24,11 @@ Emi Babu, Mary Brown, Harmeet Kaur, Sarah Mathew, Gargi Paul
 **Data Transformation**
   Used SQL queries in PGADMIN  (schema.sql) to clean the data. Column names were the values of the header row in the csv
  **Feature engineering and transformation** (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
-     + 1. age_yrs = age/365 (original age in days)
-     + 2. height_inches = height*0.393701 (original height in cm)
-     + 3. weight_lbs = weight*2.20462 (original weight in kg)
-     + 4. bmi = kg/m2 = (weight/(height\*0.01)(height\*0.01))
-     + 5. bmi_category (underweight: bmi<18.5, healthy weight: 18.5<=bmi<25, overweight: 25<=bmi<30, obese: bmi>=30)
+ + 1. age_yrs = age/365 (original age in days)
+ + 2. height_inches = height*0.393701 (original height in cm)
+ + 3. weight_lbs = weight*2.20462 (original weight in kg)
+ + 4. bmi = kg/m2 = (weight/(height\*0.01)(height\*0.01))
+ + 5. bmi_category (underweight: bmi<18.5, healthy weight: 18.5<=bmi<25, overweight: 25<=bmi<30, obese: bmi>=30)
  **Data cleanup** (deleted outliers):
      + 1. deleted records with systolic bp (ap_hi)<70 and systolic bp (ap_lo)<40
      + 2. deleted records with diastolic bp (ap_hi)>240 and diastolic bp (ap_lo)>160
