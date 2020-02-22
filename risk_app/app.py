@@ -5,39 +5,37 @@ from sqlalchemy import *
 from sqlalchemy.ext.automap import automap_base
 
 import os
-import json
+# import json
 import numpy as np
-from sklearn.svm import *
+# from sklearn.svm import *
 # from sklearn.externals 
-import joblib
-
-import pickle
-
-import tensorflow as tf
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
-
-config = ConfigProto()
-config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
-
-from tensorflow.keras.optimizers import RMSprop,Nadam,Adadelta,Adam
-from tensorflow.keras.layers import BatchNormalization,LeakyReLU
-from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
-import seaborn as sns
-import scipy.stats as stats
-import sklearn
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
-import warnings
-from tensorflow.keras.utils import to_categorical
-from numpy import loadtxt
-from keras.models import load_model
-# import keras.backend.tensorflow_backend as tb
-# tb._SYMBOLIC_SCOPE.value = True
+# import joblib
 
 # import pickle
+
+# import tensorflow as tf
+# from tensorflow.compat.v1 import ConfigProto
+# from tensorflow.compat.v1 import InteractiveSession
+
+# config = ConfigProto()
+# config.gpu_options.allow_growth = True
+# session = InteractiveSession(config=config)
+
+# from tensorflow.keras.optimizers import RMSprop,Nadam,Adadelta,Adam
+# from tensorflow.keras.layers import BatchNormalization,LeakyReLU
+# from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
+# import seaborn as sns
+# import scipy.stats as stats
+# import sklearn
+# from keras.models import Sequential
+# from keras.layers import Conv2D, MaxPooling2D
+# from keras.layers import Activation, Dropout, Flatten, Dense
+# import warnings
+# from tensorflow.keras.utils import to_categorical
+# from numpy import loadtxt
+from keras.models import load_model
+
+
 
 app = Flask(__name__)
 
@@ -107,7 +105,7 @@ def data():
     # return jsonify(results)
     return render_template("index.html", rows=results)
 
-@app.route('/resultCR',methods = ['POST'])
+@app.route('/resultCR1st',methods = ['POST'])
 def resultCRSVC():
     if request.method == 'POST': 
         patient_info = request.form.to_dict()
@@ -139,7 +137,7 @@ def resultCRSVC():
 
 
 
-@app.route('/resultCRNN',methods = ['POST'])
+@app.route('/resultCR',methods = ['POST'])
 def resultCRNN():
     if request.method == 'POST': 
         patient_info = request.form.to_dict()
@@ -158,19 +156,19 @@ def resultCRNN():
         final_shape = np.reshape(final_features,(1,-1))
         Best_model = load_model('NN_model.h5')
 
-        result = Best_model.predict_proba(final_shape)
-        # result = Best_model.predict(final_shape)
+        result = Best_model.predict(final_shape)
+        result_percent = np.round(result*100,2)
 
         myList = ['Empty','Normal (< 200)', 'Borderline High (200-239)', 'High (240 and higher)']
         cholesterolValue = int(patient_info['cholesterol'])
 
-        if int(result)==1:
+        if int(result_percent)>=50:
             prediction='Heart Disease Risk'
         else:
             prediction='NOT a Heart Disease Risk'
             
 
-        return render_template("predictCardioRisk.html",status="results",prediction=prediction,result=result[0],patient=patient_info,myBMI=myFeatures[6],myChol=myList[cholesterolValue])
+        return render_template("predictCardioRisk.html",status="results",prediction=prediction,result=result_percent,patient=patient_info,myBMI=myFeatures[6],myChol=myList[cholesterolValue])
 
 
 

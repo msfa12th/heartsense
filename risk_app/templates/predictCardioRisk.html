@@ -171,7 +171,7 @@
                     <div class="panel-body">
                         <div id="result">
                             <h2>Prediction</h2>
-                            {% if result >0 %}
+                            {% if result >= 50 %}
                             <h4 style="color: red; text-align: center">{{ prediction }} </h4>
                             <p style="color: red; text-align: center; text-emphasis-style: bold">Go see a Doctor!</p>
                             {% else %}
