@@ -171,11 +171,17 @@
                     <div class="panel-body">
                         <div id="result">
                             <h2>Prediction</h2>
-                            {% if result >= 50 %}
-                            <h4 style="color: red; text-align: center">{{ prediction }} </h4>
+                            {% if risk == 3 %}
+                            <h4 style="color: red; text-align: center">{{ prediction }}</h4>
+                            <p style="color: red; text-align: center; text-emphasis-style: bold">{{ result }}</p>
                             <p style="color: red; text-align: center; text-emphasis-style: bold">Go see a Doctor!</p>
+                            {% elif risk == 2 %}
+                            <h4 style="color: orange; text-align: center">{{ prediction }}</h4>
+                            <p style="color: orange; text-align: center; text-emphasis-style: bold">{{ result }}</p>
+                            <p style="color: orange; text-align: center; text-emphasis-style: bold">Start making healthier lifestyle choices!</p>
                             {% else %}
                             <h4 style="color: green; text-align:center">{{ prediction }} </h4>
+                            <p style="color: green; text-align: center; text-emphasis-style: bold">{{ result }}</p>
                             <p style="color: green; text-align: center; text-emphasis-style: bold">Keep making healthy choices!</p>
                             {% endif %}
 
