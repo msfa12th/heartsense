@@ -22,7 +22,7 @@ Emi Babu, Mary Brown, Harmeet Kaur, Sarah Mathew, Gargi Paul
   The dataset consists of 70,000 records of patient data, 11 features + target in CSV format.
 
 **Data Transformation**
-  Used SQL queries in PGADMIN  (schema.sql) to clean the data. Column names were the values of the header row in the csv.
+  Used SQL queries in PostGreSQL  (PGADMIN w/schema.sql) to clean the data. Column names were the values of the header row in the csv.
   
  **Feature engineering and transformation** (ages_yrs, height_inches, weight_lbs, bmi, bmi_category)
  + 1. age_yrs = age/365 (original age in days)
@@ -65,7 +65,8 @@ Cardio =0 "Absent" else "Present".For BMI,calculated field was height in cms/wei
 8.  Glucose vs Heart Disease [Circle plot]
 9. Alcohol Consumption vs Heart Disease [Bar plot]
 
-[Tableau Dashboard](https://public.tableau.com/profile/gargi.paul#!/vizhome/ProjectHeartsense_t/Dashboard1)
+[Tableau Dashboard #1](https://public.tableau.com/profile/gargi.paul#!/vizhome/ProjectHeartsense_t/Dashboard1)
+[Tableau Dashboard #2](https://public.tableau.com/profile/harmeet2811#!/vizhome/ML-project/Insight?publish=yes)
 
 ## Predictive Supervised Machine Learning:
 
