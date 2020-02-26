@@ -68,7 +68,7 @@ def predict():
 
 @app.route('/machineln')
 def machine():
-    return render_template("machinelearning.html" )    
+    return render_template("machinelearning.html" )  
 
 @app.route('/visual')
 def visual():
