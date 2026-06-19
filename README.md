@@ -147,6 +147,28 @@ With age, metabolism tends to slow down which leads to obesity. Therefore, one n
 5. App integration with neural network model was challenging. We had issues with compatibility of newer versions of tensor flow and keras.  Had to uninstall and reinstall older version to get this to load the model.  Other tensor flow library issues, ultimately prevented us calling the NN model via the flask app.  We were planning to use the NN model to show % risk (probability), versus the YES/NO output of the SVC model.
 6. Heroku deployment - had to streamline the app, remove some functionality that was causing problems with Heroku (remove reference to Neural Network libraries tensor/keras and remove code related to postGres DB, since had difficulty setting up access from Heroku to our AWS database
 
+## Legacy Conda Environment
+This project includes a separate legacy Conda spec in `legacy-conda-environment.yml` for the old Anaconda/conda-only packages that are not part of the normal pip install path.
+
+Use this environment only when you need to reproduce the legacy Conda/Anaconda workflow, for example:
+- restoring an older notebook environment
+- running legacy packages that depend on `anaconda-client`, `conda-build`, `mkl-fft`, or other Conda-only artifacts
+
+Create and activate it with:
+```bash
+conda env create -f legacy-conda-environment.yml
+conda activate heartsense-legacy
+```
+
+For the standard app setup, continue using `pip install -r requirements.txt`.
+
+## Outdated package notes
+Some packages in the old requirements are very old and may be difficult to install with current Python environments.
+
+- `tensorflow==2.9.3` is not available for all modern platforms via current pip resolution. If you need a supported replacement, use `tensorflow>=2.12.0,<2.15.0` for current Python 3.11+ compatibility, or `tensorflow-cpu` if you want a CPU-only install.
+- `absl-py==0.9.0` is also legacy; the latest stable `absl-py` versions are in the `1.x` series. A safer modern pin is `absl-py>=1.4.0`.
+
+If you want to preserve compatibility with older model code, keep these packages in the legacy Conda environment and use the standard pip requirements for current app work.
 
 ## Installations
 

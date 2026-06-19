@@ -1,0 +1,6 @@
+id,doctor_id,health_status
+1,2,healthy
+2,3,sick
+3,2,sick
+4,1,healthy
+5,1,sick
